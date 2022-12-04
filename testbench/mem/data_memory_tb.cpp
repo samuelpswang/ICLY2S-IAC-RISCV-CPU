@@ -1,4 +1,4 @@
-#include "verilatored.h"
+#include "verilated.h"
 #include "verilated_vcd_c.h"
 #include "Vdata_memory.h"
 
@@ -27,7 +27,7 @@ int main(int argc, char **argv, char **env){
     top->A += 0x00000001;
     top->WD += 0x00000001;
     top->WE = !top->WE;
-    if(Verilated::gotFinished()) exit(0);
+    if(Verilated::gotFinish()) exit(0);
     }
     tfp->close();
     exit(0);
