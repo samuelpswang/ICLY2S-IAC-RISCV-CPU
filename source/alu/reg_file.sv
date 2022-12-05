@@ -12,7 +12,7 @@ module reg_file (
 
 // note: name variables with correct name
 // note: 32 x 32-bit reg file: address 5 bits
-logic [31:0] reg_data [2**4:0]; 
+logic [31:0] reg_data [31:0]; 
 
 // note: use correct indentation for block
 // note: not needed
