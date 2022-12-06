@@ -1,4 +1,4 @@
-module instr_mem #(
+module instruction_memory #(
   parameter INSTR_WIDTH = 32,
   parameter ADDR_WIDTH = 32
 )(
