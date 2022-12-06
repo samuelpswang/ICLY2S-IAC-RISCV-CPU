@@ -36,22 +36,22 @@ Two challenges were faced while writing the program.
 
 ## Appendix A: Instructions Used
 
-**[f1_jump.asm](../program/f1/f1_jump.asm) -- Count: 8**
+**[f1_jump.asm](../program/f1/f1_jump.asm) -- Count: 9**
 
-* R: `xor`
+* R: `add`, `xor`
 * S: `sw`
 * I: `addi`, `slli`, `lw`
 * B: `bne`
 * J: `jal`, `jalr`
 
-**[f1_branch.asm](../program/f1/f1_branch.asm) -- Count: 6**
+**[f1_branch.asm](../program/f1/f1_branch.asm) -- Count: 7**
 
-* R: `xor`
+* R: `add`, `xor`
 * S: `sw`
 * I: `addi`, `slli`, `lw`
 * B: `bne`
 
-**[f1_load.asm](../program/f1/f1_load.asm)-- Count: 4**
+**[f1_load.asm](../program/f1/f1_load.asm) -- Count: 4**
 
 * S: `sw`
 * I: `addi`, `lw`
