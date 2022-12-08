@@ -65,13 +65,36 @@ always_comb
 
     7'b0100011: begin // S-type: sw
       RegWrite = 1'b0;
-      ResultSrc = 2'b00;
+      ResultSrc = 2'b00; 
       MemWrite = 1'b1;
       Jump = 1'b0;
       Branch = 1'b0;
       ALUControl = 4'b0000;
       ALUSrc = 1'b1;
       ImmSrc = 2'b10;
+    end
+
+    7'b1100111: begin  // I-type: jalr
+      RegWrite = 1'b1;
+      ResultSrc = 2'b10;
+      MemWrite = 1'b0;
+      Jump = 1'b1;
+      Branch = 1'b1;
+      ALUControl = 4'b1001;
+      ALUSrc = 1'b1;
+      ImmSrc = 2'b00;
+
+    end
+
+    7'b1101111: begin // J-type: jal
+      RegWrite = 1'b1;
+      ResultSrc = 2'b10;
+      MemWrite = 1'b0;
+      Jump = 1'b1;
+      Branch = 1'b0;
+      ALUControl = 4'b0000;
+      ALUSrc = 1'b1;
+      ImmSrc = 2'b11;
     end
 
     default: begin // nop
