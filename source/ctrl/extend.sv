@@ -15,6 +15,7 @@ always_comb begin
   else if (ImmSrc == 3'b010) ImmExt = {{20{Instr[31]}}, Instr[31:25], Instr[11:7]};
   else if (ImmSrc ==  3'b011) ImmExt = {{12{Instr[31]}},Instr[19:12],Instr[20],Instr[30:21], 1'b0};
   else if (ImmSrc == 3'b100) ImmExt = {Instr[31:12],12'b0};
+  else ImmExt = 32'b0;
 end
   
 endmodule
