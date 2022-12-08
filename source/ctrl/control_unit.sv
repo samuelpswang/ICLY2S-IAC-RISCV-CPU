@@ -9,7 +9,7 @@ module control_unit(
   output logic Branch,
   output logic [3:0] ALUControl,
   output logic ALUSrc,
-  output logic [1:0] ImmSrc
+  output logic [2:0] ImmSrc
 );
 
 always_comb 
@@ -21,7 +21,7 @@ always_comb
       Jump = 1'b0;
       Branch = 1'b0;
       ALUSrc = 1'b0;
-      ImmSrc = 2'b11;
+      ImmSrc = 3'b011;
       if ((funct3 == 3'b000) && (funct7 == 7'b0000000)) ALUControl = 4'b0000; // add
       else if ((funct3 == 3'b100) && (funct7 == 7'b0000000)) ALUControl = 4'b0100; // xor
       else ALUControl = 4'b1111;
@@ -34,7 +34,7 @@ always_comb
       Jump = 1'b0;
       Branch = 1'b1;
       ALUSrc = 1'b0;
-      ImmSrc = 2'b01;
+      ImmSrc = 3'b001;
       if (funct3 == 3'b001) ALUControl = 4'b0001; // bne
       else ALUControl = 4'b1111;
     end // need pc control logic and more alu functions to implement whole ISA
@@ -47,7 +47,7 @@ always_comb
       Branch = 1'b0;
       ALUControl = 4'b0000;
       ALUSrc = 1'b1;
-      ImmSrc = 2'b00;
+      ImmSrc = 3'b000;
     end
 
     7'b0010011: begin // I-type: addi, slli
@@ -57,7 +57,7 @@ always_comb
       Jump = 1'b0;
       Branch = 1'b0;
       ALUSrc = 1'b1;
-      ImmSrc = 2'b00;
+      ImmSrc = 3'b000;
       if (funct3 == 3'b000) ALUControl = 4'b0000; // addi
       else if ((funct3 == 3'b001) && (funct7 == 7'b0000000)) ALUControl = 4'b0110; // slli
       else ALUControl = 4'b1111;
@@ -71,7 +71,7 @@ always_comb
       Branch = 1'b0;
       ALUControl = 4'b0000;
       ALUSrc = 1'b1;
-      ImmSrc = 2'b10;
+      ImmSrc = 3'b010;
     end
 
     7'b1100111: begin  // I-type: jalr
@@ -82,7 +82,7 @@ always_comb
       Branch = 1'b1;
       ALUControl = 4'b1001;
       ALUSrc = 1'b1;
-      ImmSrc = 2'b00;
+      ImmSrc = 3'b000;
 
     end
 
@@ -94,8 +94,20 @@ always_comb
       Branch = 1'b0;
       ALUControl = 4'b0000;
       ALUSrc = 1'b1;
-      ImmSrc = 2'b11;
+      ImmSrc = 3'b011;
     end
+
+    7'b0110111: begin // U-type: lui
+      RegWrite = 1'b1;
+      ResultSrc = 2'b00;
+      MemWrite = 1'b0;
+      Jump = 1'b0;
+      Branch = 1'b0;
+      ALUControl = 4'b1010;
+      ALUSrc = 1'b1;
+      ImmSrc = 3'b100;
+    end
+
 
     default: begin // nop
       RegWrite = 1'b0;
@@ -105,7 +117,7 @@ always_comb
       Branch = 1'b0;
       ALUControl = 4'b1111;
       ALUSrc = 1'b0;
-      ImmSrc = 2'b11;
+      ImmSrc = 3'b001;
     end
   endcase
   
