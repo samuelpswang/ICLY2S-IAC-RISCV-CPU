@@ -1,6 +1,13 @@
 # os
 .DS_Store
 
+# ide
+**/.vscode/**
+
+# assembly
+*.hex
+
 # verilator
 **/build/**
+**/obj_dir/**
 *.vcd
