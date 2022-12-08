@@ -4,6 +4,9 @@
 # ide
 **/.vscode/**
 
+# assembly
+*.hex
+
 # verilator
 **/build/**
 **/obj_dir/**
