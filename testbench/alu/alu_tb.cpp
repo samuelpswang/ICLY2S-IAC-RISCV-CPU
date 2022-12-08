@@ -12,14 +12,14 @@ int main(int argc, char **argv, char **env){
     Verilated::traceEverOn(true);
     VerilatedVcdC* tfp = new VerilatedVcdC;
     top->trace(tfp,99);
-    tfp->open("Valu_top.vcd");
+    tfp->open("alu_top.vcd");
 
     // initialise simulation outputs
     top->clk =1;
     top->ALUsrc = 1;
-    top->ALUctrl = 0;
-    top->ImmOp = 0xFF;
-    top->Instr = 0x0FF00013;
+    top->ALUctrl = 0b1001;
+    top->ImmOp = 0b1111;
+    top->Instr = 0x3e808067;
     top->RegWrite = 1;
 
     // run simulation for many clock cycles
@@ -36,10 +36,10 @@ int main(int argc, char **argv, char **env){
         }
         top->clk =1;
         top->ALUsrc = 0;
-        top->ALUctrl = 0;
-        top->ImmOp = 0;
-        top->Instr = 0;
-        top-> RegWrite = 1;
+        top->ALUctrl = 0b1001;
+        top->ImmOp = 0b1111;
+        top->Instr = 0x3e808067;
+        top-> RegWrite = 0;
         if(Verilated::gotFinish()) exit(0);
         
     }
