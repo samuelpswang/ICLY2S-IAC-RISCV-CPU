@@ -66,7 +66,7 @@ logic Jump;
 logic Branch;
 logic [3:0] ALUControl;
 logic ALUSrc;
-logic [1:0] ImmSrc;
+logic [2:0] ImmSrc;
 
 control_unit control_unit(
     .op(op),
