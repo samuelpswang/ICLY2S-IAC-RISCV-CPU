@@ -27,7 +27,7 @@ logic [IMMO_WIDTH-1:0] label;
 // label logic using Jump and Branch 
 // (JB == 01 || JB == 10) -> Branch and JAL , (JB == 11) -> JALR
 
-assign label = Jump ? (Branch ? SUM : ImmOp ) : (Branch ? ImmOp : 0 );
+assign label = Jump ? (Branch ? SUM : pc+ImmOp ) : (Branch ? pc+ImmOp : 0 );
 
 
 pc_reg PC(
