@@ -37,6 +37,8 @@ always_comb begin
     4'b1000: SUM = ALUop1 >>> ALUop2[4:0];
     // jalr
     4'b1001: SUM = {JALR_INTERMEDIATE[31:1],1'b0};
+    // lui
+    4'b1010: SUM = ALUop2;
     
     default: begin
       SUM = 32'b0;
