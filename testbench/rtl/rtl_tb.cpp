@@ -1,4 +1,4 @@
-#include "VRISCV.h"
+#include "Vrtl.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 #include"vbuddy.cpp"
@@ -8,15 +8,15 @@ int main(int argc, char **argv, char **env){
     int clk;
     Verilated::commandArgs(argc,argv);
 //  initialise top verilog instance
-    VRISCV* top = new VRISCV;
+    Vrtl* top = new Vrtl;
 // initialise trace dump
     Verilated::traceEverOn(true);
     VerilatedVcdC* tfp = new VerilatedVcdC;
     top->trace(tfp,99);
-    tfp->open("RISC-V.vcd");
+    tfp->open("Vrtl.vcd");
     // init Vbuddy
     if (vbdOpen()!=1) return (-1);
-    vbdHeader("RISC-V");
+    vbdHeader("F1 Lights");
     // initialise simulation outputs
     top->clk =1;
     top->rst=0;

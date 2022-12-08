@@ -1,4 +1,4 @@
-module RISCV #(
+module rtl #(
     // 32-bit data in memory
     parameter DATA_WIDTH = 32, 
     // 32-bit counter

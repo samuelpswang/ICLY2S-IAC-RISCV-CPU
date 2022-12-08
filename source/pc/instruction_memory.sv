@@ -10,8 +10,8 @@ module instruction_memory #(
 logic [WORD_WIDTH-1:0] instr_data [2**ADDR_WIDTH-1:0];
 
 initial begin
-  $display("[DUT] Loading instr_data from f1_branch.hex file.");
-  $readmemh("../program/f1/f1_jump.s.hex", instr_data);
+  $display("[DUT] Loading instr_data from f1_jump.hex file.");
+  $readmemh("program/f1/f1_jump.s.hex", instr_data);
 end
 
 always_comb begin
