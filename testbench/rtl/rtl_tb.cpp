@@ -24,7 +24,7 @@ int main(int argc, char **argv, char **env){
 
     // run simulation for many clock cycles
     int tick = 0;
-    for(int i=0;i< 100000; i++){
+    for(int i=0;i< 300000000; i++){
         // Add to readme, remember to compelete part 2 of challenge
         // dump variables into VCD file and toggle clock
         for(clk=0;clk<2;clk++){
