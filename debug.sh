@@ -1,11 +1,10 @@
-# cleanup
+# clean previous files
 rm -rf build
 rm -f Vrtl.vcd
+make program/  -f Makefile clean
 
-# generate .hex file
-cd program
-make hexfile
-cd ..
+# make .hex file
+make program/  -f Makefile hexfile
 
 # verilator
 verilator -F debug.cfg --cc --trace source/rtl.sv --exe testbench/rtl/rtl_tb.cpp
