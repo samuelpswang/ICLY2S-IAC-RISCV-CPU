@@ -13,8 +13,9 @@ module decode_register(
   input logic [31:0] RD2D,
   input logic [31:0] PCD,
   input logic [31:0] ImmExtD,
+  input logic [31:0] PCPlus4D,
+  input logic [4:0] RdD,
   // execution stage
-  output logic [31:0] PCPlus4E,
   output logic RegWriteE,
   output logic [1:0] ResultSrcE,
   output logic MemWriteE,
@@ -25,6 +26,7 @@ module decode_register(
   output logic [31:0] RD1E,
   output logic [31:0] RD2E,
   output logic [31:0] PCE,
+  output logic [4:0] RdE,
   output logic [31:0] ImmExtE,
   output logic [31:0] PCPlus4E
 );
@@ -41,6 +43,7 @@ always_ff @ (negedge clk) begin
   RD1E <= RD1D;
   RD2E <= RD2D;
   PCE <= PCD;
+  RdE <= RdD;
   ImmExtE <= ImmExtD;
   PCPlus4E <= PCPlus4D;
 end
