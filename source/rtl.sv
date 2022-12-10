@@ -79,7 +79,8 @@ control_unit control_unit(
     .Branch(Branch),
     .ALUControl(ALUControl),
     .ALUSrc(ALUSrc),
-    .ImmSrc(ImmSrc)
+    .ImmSrc(ImmSrc),
+    .B(B)
 );
 
 // end 
@@ -98,7 +99,7 @@ logic [DATA_WIDTH-1:0] SUM;
 
 // Assigning WriteData based on operation (2-bit Multiplexer)
 
-assign WD3 = ResultSrc[1] ? (ResultSrc[0] ? SUM : pc+32'd4) : (ResultSrc[0] ? RD : SUM);
+assign WD3 = ResultSrc[1] ? (ResultSrc[0] ? SUM : pc+32'd4) : (ResultSrc[0] ? RDout : SUM);
 
 
 logic [DATA_WIDTH-1:0] RD1;
@@ -151,10 +152,12 @@ alu ALU(
 // Data Memory
 
 logic [DATA_WIDTH-1:0] RD;
+logic B;
 
 data_memory data_memory(
     .clk(clk),
     .A(SUM),
+    .B(B),
     .WE(MemWrite),
     .WD(RD2),
     .RD(RD)
@@ -162,6 +165,16 @@ data_memory data_memory(
 
 //end
 
+logic [31:0] RDout;
+
+output_controller output_controller(
+    .MemWrite(MemWrite),
+    .RegWrite(RegWrite),
+    .RegSrc(RegSrc),
+    .B(B),
+    .RDin(RD),
+    .RDout(RDout)
+);
 
 
 
