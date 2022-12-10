@@ -13,6 +13,11 @@ module data_memory #(
 
 logic [WORD_WIDTH-1:0] data [2**ADDR_WIDTH-1:0];
 
+initial begin
+  $display("[DUT] Loading data from sine.mem file.");
+  $readmemh("program/ref/sine.mem", data, 0x10000);
+end
+
 assign RD = {data[A[ADDR_WIDTH-1:0]+3], data[A[ADDR_WIDTH-1:0]+2], data[A[ADDR_WIDTH-1:0]+1], data[A[ADDR_WIDTH-1:0]]};
 
 always_ff @ (posedge clk) begin
