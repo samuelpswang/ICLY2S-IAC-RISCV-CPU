@@ -6,6 +6,7 @@
 
 # assembly
 *.hex
+*.asm
 
 # verilator
 **/build/**
