@@ -51,7 +51,7 @@ always_comb
       ALUControl = 4'b0000;
       ALUSrc = 1'b1;
       ImmSrc = 3'b000;
-      if (funct3 == 3'b000) B = 1'b1;
+      if (funct3 == 3'b100) B = 1'b1;
       else B =  1'b0;
     end
 

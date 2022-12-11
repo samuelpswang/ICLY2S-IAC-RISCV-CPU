@@ -14,8 +14,8 @@ module data_memory #(
 logic [WORD_WIDTH-1:0] data [2**ADDR_WIDTH-1:0];
 
 initial begin
-  $display("[DUT] Loading data from sine.mem file.");
-  $readmemh("program/ref/sine.mem", data, 0x10000);
+  $display("[DUT] Loading data memory from program/ref/gaussian.mem file.");
+  $readmemh("program/ref/gaussian.mem", data, 65536);
 end
 
 assign RD = {data[A[ADDR_WIDTH-1:0]+3], data[A[ADDR_WIDTH-1:0]+2], data[A[ADDR_WIDTH-1:0]+1], data[A[ADDR_WIDTH-1:0]]};
@@ -23,7 +23,7 @@ assign RD = {data[A[ADDR_WIDTH-1:0]+3], data[A[ADDR_WIDTH-1:0]+2], data[A[ADDR_W
 always_ff @ (posedge clk) begin
   if (WE) begin
     if (B) begin
-      data[A[ADDR_WIDTH-1:0]] = WD[7:0];
+      data[A[ADDR_WIDTH-1:0]] <= WD[7:0];
     end
     else begin
         data[A[ADDR_WIDTH-1:0]+3] <= WD[WORD_WIDTH*4-1:WORD_WIDTH*3];
