@@ -9,7 +9,8 @@ module control_unit(
   output logic Branch,
   output logic [3:0] ALUControl,
   output logic ALUSrc,
-  output logic [2:0] ImmSrc
+  output logic [2:0] ImmSrc,
+  output logic B
 );
 
 always_comb 
@@ -22,6 +23,7 @@ always_comb
       Branch = 1'b0;
       ALUSrc = 1'b0;
       ImmSrc = 3'b011;
+      B = 1'b0;
       if ((funct3 == 3'b000) && (funct7 == 7'b0000000)) ALUControl = 4'b0000; // add
       else if ((funct3 == 3'b100) && (funct7 == 7'b0000000)) ALUControl = 4'b0100; // xor
       else ALUControl = 4'b1111;
@@ -35,6 +37,7 @@ always_comb
       Branch = 1'b1;
       ALUSrc = 1'b0;
       ImmSrc = 3'b001;
+      B = 1'b0;
       if (funct3 == 3'b001) ALUControl = 4'b0001; // bne
       else ALUControl = 4'b1111;
     end // need pc control logic and more alu functions to implement whole ISA
@@ -48,6 +51,8 @@ always_comb
       ALUControl = 4'b0000;
       ALUSrc = 1'b1;
       ImmSrc = 3'b000;
+      if (funct3 == 3'b100) B = 1'b1;
+      else B =  1'b0;
     end
 
     7'b0010011: begin // I-type: addi, slli
@@ -58,6 +63,7 @@ always_comb
       Branch = 1'b0;
       ALUSrc = 1'b1;
       ImmSrc = 3'b000;
+      B = 1'b0;
       if (funct3 == 3'b000) ALUControl = 4'b0000; // addi
       else if ((funct3 == 3'b001) && (funct7 == 7'b0000000)) ALUControl = 4'b0110; // slli
       else ALUControl = 4'b1111;
@@ -72,6 +78,8 @@ always_comb
       ALUControl = 4'b0000;
       ALUSrc = 1'b1;
       ImmSrc = 3'b010;
+      if (funct3 == 3'b000) B = 1'b1;
+      else B = 1'b0;
     end
 
     7'b1100111: begin  // I-type: jalr
@@ -83,7 +91,7 @@ always_comb
       ALUControl = 4'b1001;
       ALUSrc = 1'b1;
       ImmSrc = 3'b000;
-
+      B = 1'b0;
     end
 
     7'b1101111: begin // J-type: jal
@@ -95,6 +103,7 @@ always_comb
       ALUControl = 4'b0000;
       ALUSrc = 1'b1;
       ImmSrc = 3'b011;
+      B = 1'b0;
     end
 
     7'b0110111: begin // U-type: lui
@@ -106,6 +115,7 @@ always_comb
       ALUControl = 4'b1010;
       ALUSrc = 1'b1;
       ImmSrc = 3'b100;
+      B = 1'b0;
     end
 
 
@@ -118,6 +128,7 @@ always_comb
       ALUControl = 4'b1111;
       ALUSrc = 1'b0;
       ImmSrc = 3'b001;
+      B = 1'b0;
     end
   endcase
   

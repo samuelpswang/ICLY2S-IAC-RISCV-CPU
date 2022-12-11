@@ -85,6 +85,7 @@ logic BranchD;
 logic [3:0] ALUControlD;
 logic ALUSrcD;
 logic [2:0] ImmSrcD;
+logic BD;
 
 control_unit control_unit(
     .op(op),
@@ -97,7 +98,8 @@ control_unit control_unit(
     .Branch(BranchD),
     .ALUControl(ALUControlD),
     .ALUSrc(ALUSrcD),
-    .ImmSrc(ImmSrcD)
+    .ImmSrc(ImmSrcD),
+    .B(BD)
 );
 
 // end 
@@ -159,6 +161,7 @@ logic JumpE;
 logic BranchE;
 logic [3:0] ALUControlE;
 logic ALUSrcE;
+logic BE;
 logic [31:0] RD1E;
 logic [31:0] RD2E;
 logic [31:0] PCE;
@@ -175,6 +178,7 @@ decode_register decode_register(
     .BranchD(BranchD),
     .ALUControlD(ALUControlD),
     .ALUSrcD(ALUSrcD),
+    .BD(BD),
     .RD1D(RD1D),
     .RD2D(RD2D),
     .PCD(PCD),
@@ -188,6 +192,7 @@ decode_register decode_register(
     .BranchE(BranchE),
     .ALUControlE(ALUControlE),
     .ALUSrcE(ALUSrcE),
+    .BE(BE),
     .RD1E(RD1E),
     .RD2E(RD2E),
     .PCE(PCE),
@@ -222,6 +227,7 @@ alu ALU(
 logic RegWriteM;
 logic [1:0] ResultSrcM;
 logic MemWriteM;
+logic BM;
 logic [DATA_WIDTH-1:0] ALUResultM;
 logic [DATA_WIDTH-1:0] WriteDataM;
 logic [4:0] RdM;
@@ -234,12 +240,14 @@ memory_stage_register memory_register(
     .ResultSrcE(ResultSrcE),
     .MemWriteE(MemWriteE),
     .ALUResultE(ALUResultE),
+    .BE(BE),
     .WriteDataE(RD2E),
     .RdE(RdE),
     .PCPlus4E(PCPlus4E),
     .RegWriteM(RegWriteM),
     .ResultSrcM(ResultSrcM),
     .MemWriteM(MemWriteM),
+    .BM(BM),
     .ALUResultM(ALUResultM),
     .WriteDataM(WriteDataM),
     .RdM(RdM),
@@ -258,10 +266,25 @@ data_memory data_memory(
     .A(ALUResultM),
     .WE(MemWriteM),
     .WD(WriteDataM),
-    .RD(ReadDataM)
+    .RD(ReadDataM),
+    .B(BM)
 );
 
 //end
+
+// Output Controller (For bit opearations): Begin
+
+
+output_controller output_controller(
+    .MemWrite(MemWriteM),
+    .RegWrite(RegWriteM),
+    .ResultSrc(ResultSrcM),
+    .B(BM),
+    .RDin(ReadDataM),
+    .RDout(RDout)
+);
+
+// Output Controller: End
 
 
 // Memory Pipeline Register
@@ -279,7 +302,7 @@ memory_writeback_register writeback_register(
     .RegWriteM(RegWriteM),
     .ResultSrcM(ResultSrcM),
     .ALUResultM(ALUResultM),
-    .ReadDataM(ReadDataM),
+    .ReadDataM(RDout),
     .RdM(RdM),
     .PCPlus4M(PCPlus4M),
     .RegWriteW(RegWriteW),
@@ -291,8 +314,6 @@ memory_writeback_register writeback_register(
 );
 
 //end
-
-
 
 
 endmodule

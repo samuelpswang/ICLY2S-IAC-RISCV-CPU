@@ -10,7 +10,7 @@ module instruction_memory #(
 logic [WORD_WIDTH-1:0] instr_data [2**ADDR_WIDTH-1:0];
 
 initial begin
-  $display("[DUT] Loading instr_data from f1_pipeline.s.hex file.");
+  $display("[DUT] Loading instruction data from program/f1/f1_pipeline.hex file.");
   $readmemh("program/f1/f1_pipeline.s.hex", instr_data);
 end
 

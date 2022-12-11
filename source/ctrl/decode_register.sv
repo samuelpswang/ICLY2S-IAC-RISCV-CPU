@@ -9,6 +9,7 @@ module decode_register(
   input logic BranchD,
   input logic [3:0] ALUControlD,
   input logic ALUSrcD,
+  input logic BD,
   input logic [31:0] RD1D,
   input logic [31:0] RD2D,
   input logic [31:0] PCD,
@@ -23,6 +24,7 @@ module decode_register(
   output logic BranchE,
   output logic [3:0] ALUControlE,
   output logic ALUSrcE,
+  output logic BE,
   output logic [31:0] RD1E,
   output logic [31:0] RD2E,
   output logic [31:0] PCE,
@@ -40,6 +42,7 @@ always_ff @ (negedge clk) begin
   BranchE <= BranchD;
   ALUControlE <= ALUControlD;
   ALUSrcE <= ALUSrcD;
+  BE <=BD;
   RD1E <= RD1D;
   RD2E <= RD2D;
   PCE <= PCD;
