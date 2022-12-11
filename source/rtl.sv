@@ -1,12 +1,12 @@
 module rtl #(
-    parameter DATA_WIDTH = 32, // 32-bit data in memory
-    parameter ADDR_WIDTH = 32, // 32-bit counter
-    parameter IMMO_WIDTH = 32, // 32-bit immediate
-    parameter INSTR_WIDTH = 32 // 32-bit instruction 
+  parameter DATA_WIDTH = 32, // 32-bit data in memory
+  parameter ADDR_WIDTH = 32, // 32-bit counter
+  parameter IMMO_WIDTH = 32, // 32-bit immediate
+  parameter INSTR_WIDTH = 32 // 32-bit instruction 
 )(
-    input logic clk, // clock
-    input logic rst, // cpu reset
-    output logic [DATA_WIDTH-1:0] a0 //output register
+  input logic clk, // clock
+  input logic rst, // cpu reset
+  output logic [DATA_WIDTH-1:0] a0 //output register
 );
 
 
@@ -20,7 +20,7 @@ logic [IMMO_WIDTH-1:0] label;
 // (JB == 01 || JB == 10) -> Branch and JAL , (JB == 11) -> JALR
 assign label = Jump ? (Branch ? SUM : pc+ImmOp ) : (Branch ? pc+ImmOp : 0 );
 
-pc_reg pc(
+pc_reg pc_reg(
   .clk(clk),
   .rst(rst),
   .PCsrc((Branch && !EQ) || Jump),
