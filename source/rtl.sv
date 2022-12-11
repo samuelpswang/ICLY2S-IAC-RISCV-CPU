@@ -1,24 +1,16 @@
 module rtl #(
-    // 32-bit data in memory
-    parameter DATA_WIDTH = 32, 
-    // 32-bit counter
-    parameter ADDR_WIDTH = 32,
-    // 32-bit immediate
-    parameter IMMO_WIDTH = 32,
-    // 32-bit instruction 
-    parameter INSTR_WIDTH = 32
-
+  parameter DATA_WIDTH = 32, // 32-bit data in memory
+  parameter ADDR_WIDTH = 32, // 32-bit counter
+  parameter IMMO_WIDTH = 32, // 32-bit immediate
+  parameter INSTR_WIDTH = 32 // 32-bit instruction 
 )(
-    // reset cpu
-    input logic rst,
-    // clock
-    input logic clk,
-    //output register
-    output logic [DATA_WIDTH-1:0] a0
+  input logic clk, // clock
+  input logic rst, // cpu reset
+  output logic [DATA_WIDTH-1:0] a0 //output register
 );
 
 
-// Program Counter
+// Program Counter: Begin
 
 logic [IMMO_WIDTH-1:0] ImmOp;
 logic [ADDR_WIDTH-1:0] pc;
@@ -26,34 +18,34 @@ logic [IMMO_WIDTH-1:0] label;
 
 // label logic using Jump and Branch 
 // (JB == 01 || JB == 10) -> Branch and JAL , (JB == 11) -> JALR
-
 assign label = Jump ? (Branch ? SUM : pc+ImmOp ) : (Branch ? pc+ImmOp : 0 );
 
-
-pc_reg PC(
-    .clk(clk),
-    .rst(rst),
-    .PCsrc((Branch && !EQ) || Jump),
-    .label(label),
-    .pc(pc)
+pc_reg pc_reg(
+  .clk(clk),
+  .rst(rst),
+  .PCsrc((Branch && !EQ) || Jump),
+  .label(label),
+  .pc(pc)
 );
 
-// end 
+// Program Counter: End
 
 
-// Instruction memory
+
+// Instruction Memory: Begin
 
 logic [INSTR_WIDTH-1:0] Instruction;
 
 instruction_memory instr_mem(
-    .A(pc),
-    .RD(Instruction)
+  .A(pc),
+  .RD(Instruction)
 );
 
-// end
+// Instruction Memory: End
 
 
-// Control Unit 
+
+// Control Unit: Begin
 
 // Assigning Instr[6:0] to opcode 
 logic [6:0] op = Instruction[6:0];
@@ -69,100 +61,117 @@ logic ALUSrc;
 logic [2:0] ImmSrc;
 
 control_unit control_unit(
-    .op(op),
-    .funct3(funct3),
-    .funct7(funct7),
-    .RegWrite(RegWrite),
-    .ResultSrc(ResultSrc),
-    .MemWrite(MemWrite),
-    .Jump(Jump),
-    .Branch(Branch),
-    .ALUControl(ALUControl),
-    .ALUSrc(ALUSrc),
-    .ImmSrc(ImmSrc)
+  .op(op),
+  .funct3(funct3),
+  .funct7(funct7),
+  .RegWrite(RegWrite),
+  .ResultSrc(ResultSrc),
+  .MemWrite(MemWrite),
+  .Jump(Jump),
+  .Branch(Branch),
+  .ALUControl(ALUControl),
+  .ALUSrc(ALUSrc),
+  .ImmSrc(ImmSrc),
+  .B(B)
 );
 
-// end 
+// Control Unit: End 
 
 
-// Register File
 
-// Assinging Instr[19:15] to address of rs1
-logic [4:0] AD1 = Instruction[19:15];
-// Assigning Instr[24:20] to address of rs2
-logic [4:0] AD2 = Instruction[24:20];
-// Assigning Instr[11:7] to address of rd
-logic [4:0] AD3 = Instruction[11:7];
+// Register File: Begin
+
+logic [4:0] AD1 = Instruction[19:15]; // Assinging Instr[19:15] to address of rs1
+logic [4:0] AD2 = Instruction[24:20]; // Assigning Instr[24:20] to address of rs2
+logic [4:0] AD3 = Instruction[11:7]; // Assigning Instr[11:7] to address of rd
 logic [DATA_WIDTH-1:0] WD3;
 logic [DATA_WIDTH-1:0] SUM;
 
 // Assigning WriteData based on operation (2-bit Multiplexer)
-
-assign WD3 = ResultSrc[1] ? (ResultSrc[0] ? SUM : pc+32'd4) : (ResultSrc[0] ? RD : SUM);
-
+assign WD3 = ResultSrc[1] ? (ResultSrc[0] ? SUM : pc+32'd4) : (ResultSrc[0] ? RDout : SUM);
 
 logic [DATA_WIDTH-1:0] RD1;
 logic [DATA_WIDTH-1:0] RD2;
 
-reg_file register(
-    .clk(clk),
-    .AD1(AD1),
-    .AD2(AD2),
-    .AD3(AD3),
-    .WE3(RegWrite),
-    .WD3(WD3),
-    .RD1(RD1),
-    .RD2(RD2),
-    .a0(a0)
+register_file register(
+  .clk(clk),
+  .A1(AD1),
+  .A2(AD2),
+  .A3(AD3),
+  .WE3(RegWrite),
+  .WD3(WD3),
+  .RD1(RD1),
+  .RD2(RD2),
+  .a0(a0)
 );
 
-//end
+// Register File: End
 
 
-// Sign Extend 
+
+// Sign Extend: Begin
+
 logic [31:7] Imm = Instruction[31:7];
 
 extend sign_extend(
-    .Instr(Imm),
-    .ImmSrc(ImmSrc),
-    .ImmExt(ImmOp)
+  .Instr(Imm),
+  .ImmSrc(ImmSrc),
+  .ImmExt(ImmOp)
 );
 
-// end 
+// Sign Extend: End 
 
 
-// ALU 
+
+// ALU: Begin
 
 logic EQ;
 
-alu ALU(
-    .ALUsrc(ALUSrc),
-    .ALUctrl(ALUControl),
-    .ImmOp(ImmOp),
-    .ALUop1(RD1),
-    .regOp2(RD2),
-    .EQ(EQ),
-    .SUM(SUM)
+alu alu(
+  .ALUsrc(ALUSrc),
+  .ALUctrl(ALUControl),
+  .ImmOp(ImmOp),
+  .ALUop1(RD1),
+  .regOp2(RD2),
+  .EQ(EQ),
+  .SUM(SUM)
 );
 
-// end 
+// ALU: End 
 
 
-// Data Memory
+
+// Data Memory: Begin
 
 logic [DATA_WIDTH-1:0] RD;
+logic B;
 
 data_memory data_memory(
-    .clk(clk),
-    .A(SUM),
-    .WE(MemWrite),
-    .WD(RD2),
-    .RD(RD)
+  .clk(clk),
+  .A(SUM),
+  .B(B),
+  .WE(MemWrite),
+  .WD(RD2),
+  .RD(RD)
 );
 
-//end
+// Data Memory: End
 
 
 
+// Output Controller: Begin
+
+logic [31:0] RDout;
+
+output_controller output_controller(
+    .MemWrite(MemWrite),
+    .RegWrite(RegWrite),
+    .ResultSrc(ResultSrc),
+    .B(B),
+    .RDin(RD),
+    .RDout(RDout)
+);
+
+// Output Controller: End
 
 endmodule

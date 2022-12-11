@@ -19,6 +19,9 @@ always_comb begin
 end
 
 always_ff @(posedge clk)
-  if (WE3) reg_data[A3] <= WD3; 
+  if (WE3) begin
+    if (A3 == 5'b0) reg_data[A3] <= 32'b0; 
+    else reg_data[A3] <= WD3; 
+  end
 
 endmodule
