@@ -1,6 +1,7 @@
 # cleanup
 rm -rf build
 rm -f Vrtl.vcd
+make -f program/f1.mk clean
 make -f program/ref.mk clean
 
 # generate .hex file
