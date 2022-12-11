@@ -1,4 +1,4 @@
-# cleanup
+# clean previous files
 rm -rf build
 rm -f Vrtl.vcd
 make -f program/f1.mk clean
