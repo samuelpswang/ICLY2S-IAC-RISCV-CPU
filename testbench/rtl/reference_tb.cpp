@@ -35,7 +35,10 @@ int main(int argc, char **argv, char **env){
             top->eval ();
         }
 
-        if (i > 800000) vbdPlot(int(top->a0), 0, 255);
+        if (i > 800000) {
+            int val = int(top->a0);
+            if (val) vbdPlot(int(top->a0), 0, 255);
+        }
         if (Verilated::gotFinish()) exit(0);
     }
 
