@@ -37,8 +37,8 @@ int main(int argc, char **argv, char **env){
         
         top->clk =1;
         top->rst=0;
-        // if(i > 50000) vbdPlot(int(top->a0),0,255);
-        // vbdCycle(i+1);
+        if(i > 50000) vbdPlot(int(top->a0),0,255);
+        vbdCycle(i+1);
         
         if(Verilated::gotFinish()) exit(0);
         
