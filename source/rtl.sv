@@ -274,6 +274,7 @@ data_memory data_memory(
 
 // Output Controller (For bit opearations): Begin
 
+logic [DATA_WIDTH-1:0] RDout;
 
 output_controller output_controller(
     .MemWrite(MemWriteM),
