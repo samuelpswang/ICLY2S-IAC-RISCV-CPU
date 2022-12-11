@@ -6,7 +6,7 @@
 
 
 clean:
-	@rm -f program/ref/pdf.hex program/ref/pdf.asm ref/*.out program/ref/pdf.bin
+	@rm -f program/ref/*.hex program/ref/*.asm program/ref/*.bin
 
 reference: program/ref/pdf.s
 	@riscv64-unknown-elf-as -R -march=rv32im -mabi=ilp32 -o program/ref/pdf.out program/ref/pdf.s
