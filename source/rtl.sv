@@ -170,7 +170,7 @@ logic [31:0] RDout;
 output_controller output_controller(
     .MemWrite(MemWrite),
     .RegWrite(RegWrite),
-    .RegSrc(RegSrc),
+    .RegSrc(ResultSrc),
     .B(B),
     .RDin(RD),
     .RDout(RDout)
