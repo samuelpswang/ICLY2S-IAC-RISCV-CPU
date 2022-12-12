@@ -26,7 +26,7 @@ int main(int argc, char **argv, char **env){
     top->rst = 0;
 
     // run simulation for many clock cycles
-    for (int i = 0; i < 1000000; i++) {
+    for (int i = 0; i < 2000000; i++) { // note: triangle waveform required more cycles
         for(clk=0;clk<2;clk++){
             // in ps
             tfp->dump (2*i+clk);
@@ -35,9 +35,9 @@ int main(int argc, char **argv, char **env){
             top->eval ();
         }
 
-        if (i > 800000) {
+        if (i > 1000000) {
             int val = int(top->a0);
-            if (val) vbdPlot(int(top->a0), 0, 255);
+            if (val) vbdPlot(int(top->a0), 0, 256);
         }
         if (Verilated::gotFinish()) exit(0);
     }

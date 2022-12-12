@@ -1,7 +1,7 @@
 .text
 .equ base_pdf, 0x100
 .equ base_data, 0x10000
-.equ max_count, 255
+.equ max_count, 255             # increase cycle to 255 for better graphics
 
 main:
     JAL     ra, init            # jump to init, ra and save position to ra
@@ -35,7 +35,6 @@ build:                          # function to build prob dist func (pdf)
     LI      a2, 0               # a2 = offset into of data array 
     LI      a3, base_pdf        # a3 = base address of pdf array
     LI      a4, max_count       # a4 = maximum count to terminate
-    NOP
 _loop2:                         # repeat
     ADD     a5, a1, a2          # a5 = data base address + offset
     NOP                         # 3x nop after alu operations
@@ -62,6 +61,9 @@ _loop2:                         # repeat
     NOP
     NOP
     ADDI    a2, a2, 1           # point to next data in array
+    NOP                         # 3x nop after alu operations
+    NOP
+    NOP
     BNE     t1, a4, _loop2      # until bin count reaches max
     NOP
     RET
@@ -74,7 +76,7 @@ display:                        # function send PDF array value to a0 for displa
     NOP
 _loop3:                         # repeat
     LBU     a0, base_pdf(a1)    # a0 = mem[base_pdf+a1)
-    addi    a1, a1, 1           # incr 
+    ADDI    a1, a1, 1           # incr 
     NOP                         # 3x nop after alu operations (2x needed only)
     NOP
     NOP
