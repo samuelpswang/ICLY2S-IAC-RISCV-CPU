@@ -6,7 +6,7 @@ module cached_memory_2way_top #(
     input logic [ADDR_WIDTH-1:0] A,
     input logic WE,
     input logic [DATA_WIDTH-1:0] WD,
-    output logic [DATA_WIDTH-1:0] DATA_OUT
+    output logic [DATA_WIDTH-1:0] RD
 );
 
 logic [DATA_WIDTH-1:0] RD_0;
