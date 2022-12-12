@@ -31,7 +31,7 @@ logic dirty_reg [7:0];
 always_ff @ (negedge clk) begin
     if (WEC && !hit) begin
         if (WEE) begin
-            case {block_offset}
+            case (block_offset)
                 2'b00: begin
                     data_reg_0[set_num] <= DATA_IN;
                     tag_reg[set_num] <= tag;
