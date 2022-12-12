@@ -261,10 +261,13 @@ memory_stage_register memory_register(
 
 logic [DATA_WIDTH-1:0] ReadDataM;
 
-data_memory data_memory(
+cached_memory_2way_top data_memory(
     .clk(clk),
     .A(ALUResultM),
     .WE(MemWriteM),
+    .TAG(ALUResultM[31:7]),
+    .SET(ALUResultM[6:4]),
+    .BLOCK_OFFSET(ALUResultM[3:2]),
     .WD(WriteDataM),
     .RD(ReadDataM),
     .B(BM)

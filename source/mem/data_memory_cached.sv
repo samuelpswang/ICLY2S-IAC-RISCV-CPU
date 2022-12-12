@@ -5,6 +5,7 @@ module data_memory_cached #(
 )(
   input logic clk,
   input logic [DATA_WIDTH-1:0] A,
+  input logic B,
   input logic WE,
   input logic [DATA_WIDTH-1:0] WD,
   output logic [DATA_WIDTH-1:0] RD,
