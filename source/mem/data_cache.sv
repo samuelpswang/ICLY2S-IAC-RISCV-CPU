@@ -3,11 +3,13 @@ module data_cache #(
     parameter TAG_WIDTH = 25
 )(
     input logic clk,
-    input logic WE,
+    input logic WEE, // Write enable from outside
+    input logic WEC, // Write enable for the cache
     input logic [24:0] tag,
     input logic [2:0] set_num,
     input logic [1:0] block_offset,
-    input logic [DATA_WIDTH-1:0] DATA_IN_0,
+    input logic [DATA_WIDTH-1:0] DATA_IN, // Data from outside
+    input logic [DATA_WIDTH-1:0] DATA_IN_0, // Data0 from data memory
     input logic [DATA_WIDTH-1:0] DATA_IN_1,  
     input logic [DATA_WIDTH-1:0] DATA_IN_2,
     input logic [DATA_WIDTH-1:0] DATA_IN_3,
@@ -23,14 +25,40 @@ logic [DATA_WIDTH-1:0] data_reg_3 [7:0];
 logic [7:0] valid_reg;
 logic [TAG_WIDTH-1:0] tag_reg [7:0];
 
-always_ff @ (negedge clk)begin
-    if(WE)begin
+always_ff @ (negedge clk) begin
+    if (WEC) begin
+        if (WEE) begin
+            case {block_offset}
+                2'b00: begin
+                    data_reg_0[set_num] = DATA_IN;
+                    tag_reg[set_num] <= tag;
+                    valid_reg[set_num] <= 1'b1;
+                end
+                2'b01: begin
+                    data_reg_1[set_num] = DATA_IN;
+                    tag_reg[set_num] <= tag;
+                    valid_reg[set_num] <= 1'b1;
+                end
+                2'b10: begin
+                    data_reg_2[set_num] = DATA_IN;
+                    tag_reg[set_num] <= tag;
+                    valid_reg[set_num] <= 1'b1;
+                end
+                2'b11: begin
+                    data_reg_3[set_num] = DATA_IN;
+                    tag_reg[set_num] <= tag;
+                    valid_reg[set_num] <= 1'b1;
+                end
+            endcase
+        end
+        else begin
         data_reg_0[set_num] <= DATA_IN_0;
         data_reg_1[set_num] <= DATA_IN_1;
         data_reg_2[set_num] <= DATA_IN_2;
         data_reg_3[set_num] <= DATA_IN_3;
         tag_reg[set_num] <= tag;
         valid_reg[set_num] <= 1'b1;
+        end
     end
 end
 
