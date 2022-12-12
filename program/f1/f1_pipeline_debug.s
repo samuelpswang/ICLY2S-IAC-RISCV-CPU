@@ -1,6 +1,6 @@
 main:   
     addi    s0, zero, 0x1       # s0: set to 1 to avoid using bne
-    addi    a0, zero, 0x0      # special state for when lfsr is running (1100 0011)
+    addi    a0, zero, 0xC3      # special state for when lfsr is running (1100 0011)
     addi    a1, zero, 0x0
     jal     ra, lfsr
     addi    zero, zero, 0x0     # nop: 1x needed after jump or branch
@@ -109,4 +109,4 @@ nloop:                          # next loop
     addi    zero, zero, 0x0     # nop: 1x needed after jump or branch
 
 end:
-    addi    a0, zero, 0x0      # special state for when program ended (0011 1100)
+    addi    a0, zero, 0x3C      # special state for when program ended (0011 1100)

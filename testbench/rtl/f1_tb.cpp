@@ -1,49 +1,50 @@
 #include "Vrtl.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
-#include"vbuddy.cpp"
+#include "vbuddy.cpp"
 
-int main(int argc, char **argv, char **env){
-    int it;
+int main(int argc, char **argv, char **env) {
+    // init variables
     int clk;
+
+    //  init top verilog instance
     Verilated::commandArgs(argc,argv);
-//  initialise top verilog instance
     Vrtl* top = new Vrtl;
-// initialise trace dump
+
+    // init trace dump
     Verilated::traceEverOn(true);
     VerilatedVcdC* tfp = new VerilatedVcdC;
-    top->trace(tfp,99);
+    top->trace(tfp, 99);
     tfp->open("Vrtl.vcd");
-    // init Vbuddy
-    if (vbdOpen()!=1) return (-1);
+
+    // init vbuddy
+    if (vbdOpen() != 1) return 1;
     vbdHeader("F1 Lights");
-    // initialise simulation outputs
+    
+    // initial variable state
     top->clk =1;
     top->rst=0;
 
-
     // run simulation for many clock cycles
     int tick = 0;
-    for(int i=0;i< 300000000; i++){
+    for (int i = 0; i < 1000000; i++) {
         // Add to readme, remember to compelete part 2 of challenge
-        // dump variables into VCD file and toggle clock
-        for(clk=0;clk<2;clk++){
-            // in ps
-            tfp->dump (2*i+clk);
-            // falling edge
+        // dump variables into .vcd and toggle clock
+        for (clk = 0; clk < 2; clk++) {
+            tfp->dump(2*i+clk);
             top->clk = !top->clk;
-            top->eval ();
+            top->eval();
         }
         
-        top->clk =1;
-        top->rst=0;
+        top->clk = 1;
+        top->rst = 0;
         vbdBar(top->a0 & 0xFF);
         
         if(Verilated::gotFinish()) exit(0);
-        
     }
+
+    // housekeeping
     vbdClose();
     tfp->close();
     exit(0);
-
 }

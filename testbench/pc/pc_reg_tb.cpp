@@ -15,14 +15,13 @@ int main(int argc, char **argv, char **env) {
   VerilatedVcdC* tfp = new VerilatedVcdC;
 
   top->trace(tfp, 99);
-  tfp->open("pc.vcd");
+  tfp->open("Vpc.vcd");
 
   top->clk = 1;
   top->rst = 1;
 
   // branch 20 every cycle
-  top->PCsrc = 1;
-  top->ImmOp = 20;
+  top->PCsrc = 0;
 
   for (simcyc = 0; simcyc < MAX_SIM_CYC; simcyc++) {
     for (tick = 0; tick < 2; tick++) {

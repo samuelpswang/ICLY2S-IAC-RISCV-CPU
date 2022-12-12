@@ -10,7 +10,7 @@ int main(int agrc, char **argv, char **env) {
     Verilated::traceEverOn(true);
     VerilatedVcdC* tfp = new VerilatedVcdC;
     top->trace (tfp, 99);
-    tfp->open ("control_top.vcd");
+    tfp->open ("Vcontrol_top.vcd");
 
     top->clk = 1;
     top->Instr = 0x00001063; // bne zero, zero, <same_line>

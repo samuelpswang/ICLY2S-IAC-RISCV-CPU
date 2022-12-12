@@ -12,7 +12,7 @@ int main(int argc, char **argv, char **env){
     Verilated::traceEverOn(true);
     VerilatedVcdC* tfp = new VerilatedVcdC;
     top->trace(tfp,99);
-    tfp->open("alu_top.vcd");
+    tfp->open("Valu_top.vcd");
 
     // initialise simulation outputs
     top->clk =1;
