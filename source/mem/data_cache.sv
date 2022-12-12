@@ -28,7 +28,7 @@ logic [TAG_WIDTH-1:0] tag_reg [7:0];
 logic dirty_reg [7:0];
 
 
-always_ff @ (negedge clk) begin
+always_ff @ (posedge clk) begin
     if (WEC && !hit) begin
         if (WEE) begin
             case (block_offset)
