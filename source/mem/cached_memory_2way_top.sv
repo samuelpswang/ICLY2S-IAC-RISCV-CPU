@@ -5,9 +5,6 @@ module cached_memory_2way_top #(
     input logic clk,
     input logic [ADDR_WIDTH-1:0] A,
     input logic WE,
-    input logic [24:0] TAG,
-    input logic [2:0] SET,
-    input logic [1:0] BLOCK_OFFSET,
     input logic [DATA_WIDTH-1:0] WD,
     output logic [DATA_WIDTH-1:0] DATA_OUT
 );
@@ -29,9 +26,9 @@ logic U;
 
 data_cache data_cache_1(
     .clk(clk),
-    .tag(TAG),
-    .set_num(SET),
-    .block_offset(BLOCK_OFFSET),
+    .tag(A[31:7]),
+    .set_num(A[6:4]),
+    .block_offset(A[3:2]),
     .WE(!U),
     .DATA_IN_0(RD_0),
     .DATA_IN_1(RD_1),
@@ -44,9 +41,9 @@ data_cache data_cache_1(
 
 data_cache data_cache_2(
     .clk(clk),
-    .tag(TAG),
-    .set_num(SET),
-    .block_offset(BLOCK_OFFSET),
+    .tag(A[31:7]),
+    .set_num(A[6:4]),
+    .block_offset(A[3:2]),
     .WE(U),
     .DATA_IN_0(RD_0),
     .DATA_IN_1(RD_1),
@@ -60,7 +57,7 @@ data_cache data_cache_2(
 way_divider way_divider(
     .clk(clk),
     .WEC(WE),
-    .set_num(SET),
+    .set_num(A[6:4]),
     .U(U)
 );
 
@@ -73,7 +70,7 @@ way_merger way_merger(
     .TAG1(T2),
     .DATA0(DATA_OUT_CACHE_1),
     .DATA1(DATA_OUT_CACHE_2),
-    .Tag(TAG),
+    .Tag(A[31:7]),
     .DATA_OUT(DATA_OUT_CACHE),
     .hit(hit)
 );
