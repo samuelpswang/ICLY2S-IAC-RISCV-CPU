@@ -31,23 +31,31 @@ always_ff @ (negedge clk) begin
             case {block_offset}
                 2'b00: begin
                     data_reg_0[set_num] = DATA_IN;
-                    tag_reg[set_num] <= tag;
-                    valid_reg[set_num] <= 1'b1;
+                    tag_reg[set_num] = tag;
+                    valid_reg[set_num] = 1'b1;
                 end
                 2'b01: begin
                     data_reg_1[set_num] = DATA_IN;
-                    tag_reg[set_num] <= tag;
-                    valid_reg[set_num] <= 1'b1;
+                    tag_reg[set_num] = tag;
+                    valid_reg[set_num] = 1'b1;
                 end
                 2'b10: begin
                     data_reg_2[set_num] = DATA_IN;
-                    tag_reg[set_num] <= tag;
-                    valid_reg[set_num] <= 1'b1;
+                    tag_reg[set_num] = tag;
+                    valid_reg[set_num] = 1'b1;
                 end
                 2'b11: begin
                     data_reg_3[set_num] = DATA_IN;
-                    tag_reg[set_num] <= tag;
-                    valid_reg[set_num] <= 1'b1;
+                    tag_reg[set_num] = tag;
+                    valid_reg[set_num] = 1'b1;
+                end
+                default: begin
+                    data_reg_0[set_num] = 32'b0;
+                    data_reg_1[set_num] = 32'b0;
+                    data_reg_2[set_num] = 32'b0;
+                    data_reg_3[set_num] = 32'b0;
+                    tag_reg[set_num] = 25'b0;
+                    valid_reg[set_num] = 1'b0;
                 end
             endcase
         end
