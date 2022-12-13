@@ -11,8 +11,23 @@ module way_merger #(
   input logic [DATA_WIDTH-1:0] DATA0, // Data from cache 0
   input logic [DATA_WIDTH-1:0] DATA1, // Data from cache 1
   input logic [24:0] Tag,
+  input logic Cache_0_Data_Mem_WE,
+  input logic Cache_1_Data_Mem_WE,
+  input logic [DATA_WIDTH-1:0] Cache_0_WD0,
+  input logic [DATA_WIDTH-1:0] Cache_0_WD1,
+  input logic [DATA_WIDTH-1:0] Cache_0_WD2,
+  input logic [DATA_WIDTH-1:0] Cache_0_WD3,
+  input logic [DATA_WIDTH-1:0] Cache_1_WD0,
+  input logic [DATA_WIDTH-1:0] Cache_1_WD1,
+  input logic [DATA_WIDTH-1:0] Cache_1_WD2,
+  input logic [DATA_WIDTH-1:0] Cache_1_WD3,
   output logic [DATA_WIDTH-1:0] DATA_OUT, // Data output if hit
-  output logic hit
+  output logic hit,
+  output logic Data_Mem_WE,
+  output logic [DATA_WIDTH-1:0] WD0,
+  output logic [DATA_WIDTH-1:0] WD1,
+  output logic [DATA_WIDTH-1:0] WD2,
+  output logic [DATA_WIDTH-1:0] WD3
 );
 
 logic hit0;
@@ -23,6 +38,25 @@ always_comb begin
     hit0 = (Tag == TAG0) && V0 && !WE0;
     hit1 = (Tag == TAG1) && V1 && !WE1;
     hit = hit0 | hit1;
+end
+
+always_comb begin
+
+  Data_Mem_WE = Cache_0_Data_Mem_WE | Cache_1_Data_Mem_WE;
+
+  if (Cache_0_Data_Mem_WE) begin
+    WD0 = Cache_0_WD0;
+    WD1 = Cache_0_WD1;
+    WD2 = Cache_0_WD2;
+    WD3 = Cache_0_WD3;
+  end
+  else begin
+    WD0 = Cache_1_WD0;
+    WD1 = Cache_1_WD1;
+    WD2 = Cache_1_WD2;
+    WD3 = Cache_1_WD3;
+  end
+  
 end
 
 // Data output
