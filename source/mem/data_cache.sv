@@ -10,14 +10,19 @@ module data_cache #(
     input logic [2:0] set_num,
     input logic [1:0] block_offset,
     input logic [DATA_WIDTH-1:0] DATA_IN, // Data from outside
-    input logic [DATA_WIDTH-1:0] DATA_IN_0, // Data0 from data memory
+    input logic [DATA_WIDTH-1:0] DATA_IN_0, // Data 0 from data memory
     input logic [DATA_WIDTH-1:0] DATA_IN_1,  
     input logic [DATA_WIDTH-1:0] DATA_IN_2,
     input logic [DATA_WIDTH-1:0] DATA_IN_3,
     output logic [TAG_WIDTH-1:0] TAG,
     output logic V,  
-    output logic [DATA_WIDTH-1:0] DATA_OUT
-);
+    output logic [DATA_WIDTH-1:0] DATA_OUT, // Data for outside
+    output logic DATA_MEM_WE,
+    output logic [DATA_WIDTH-1:0] DATA_OUT_0, // Data 0 for data memory
+    output logic [DATA_WIDTH-1:0] DATA_OUT_1,
+    output logic [DATA_WIDTH-1:0] DATA_OUT_2,
+    output logic [DATA_WIDTH-1:0] DATA_OUT_3
+); 
 
 logic [DATA_WIDTH-1:0] data_reg_0 [7:0];
 logic [DATA_WIDTH-1:0] data_reg_1 [7:0];
@@ -25,8 +30,17 @@ logic [DATA_WIDTH-1:0] data_reg_2 [7:0];
 logic [DATA_WIDTH-1:0] data_reg_3 [7:0];
 logic [7:0] valid_reg;
 logic [TAG_WIDTH-1:0] tag_reg [7:0];
-logic dirty_reg [7:0];
+logic [7:0] dirty_reg;
 
+always_comb
+    DATA_MEM_WE = valid_reg[set_num] && WEC && dirty_reg[set_num];
+
+always_comb begin
+    DATA_OUT_0 = data_reg_0[set_num];
+    DATA_OUT_1 = data_reg_1[set_num];
+    DATA_OUT_2 = data_reg_2[set_num];
+    DATA_OUT_3 = data_reg_3[set_num];
+end
 
 always_ff @ (posedge clk) begin
     if (WEC && !hit) begin
