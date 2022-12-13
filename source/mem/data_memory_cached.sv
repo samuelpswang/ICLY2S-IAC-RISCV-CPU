@@ -7,8 +7,10 @@ module data_memory_cached #(
   input logic [DATA_WIDTH-1:0] A,
   input logic B,
   input logic WE,
-  input logic [DATA_WIDTH-1:0] WD,
-  output logic [DATA_WIDTH-1:0] RD,
+  input logic [DATA_WIDTH-1:0] WD0,
+  input logic [DATA_WIDTH-1:0] WD1,
+  input logic [DATA_WIDTH-1:0] WD2,
+  input logic [DATA_WIDTH-1:0] WD3,
   output logic [DATA_WIDTH-1:0] RD0, // Data for cache write, block offset 00
   output logic [DATA_WIDTH-1:0] RD1, // Data for cache write, block offset 01
   output logic [DATA_WIDTH-1:0] RD2, // Data for cache write, block offset 10
@@ -21,11 +23,11 @@ logic [DATA_WIDTH-1:0] A1;
 logic [DATA_WIDTH-1:0] A2;
 logic [DATA_WIDTH-1:0] A3;
 
-always_comb begin
+/*always_comb begin
   if (A[1:0] == 2'b00) RD = {data[A[ADDR_WIDTH-1:0]+3], data[A[ADDR_WIDTH-1:0]+2], data[A[ADDR_WIDTH-1:0]+1], data[A[ADDR_WIDTH-1:0]]};
   else if (A[1:0] == 2'b10) RD = {{16{1'b0}},data[A[ADDR_WIDTH-1:0]+1], data[A[ADDR_WIDTH-1:0]]};
   else RD = {24'b0, data[A[ADDR_WIDTH-1:0]]};
-end
+end*/
 
 always_comb begin
     A0 = {A[31:4], {2'b0}, {2'b0}};
@@ -45,17 +47,38 @@ end
 always_ff @ (posedge clk) begin
   if (WE) begin
       if (A[1:0] == 2'b00) begin
-        data[A[ADDR_WIDTH-1:0]+3] <= WD[WORD_WIDTH*4-1:WORD_WIDTH*3];
-        data[A[ADDR_WIDTH-1:0]+2] <= WD[WORD_WIDTH*3-1:WORD_WIDTH*2];
-        data[A[ADDR_WIDTH-1:0]+1] <= WD[WORD_WIDTH*2-1:WORD_WIDTH];
-        data[A[ADDR_WIDTH-1:0]] <= WD[WORD_WIDTH-1:0];
+        data[A0[ADDR_WIDTH-1:0]+3] <= WD0[WORD_WIDTH*4-1:WORD_WIDTH*3];
+        data[A0[ADDR_WIDTH-1:0]+2] <= WD0[WORD_WIDTH*3-1:WORD_WIDTH*2];
+        data[A0[ADDR_WIDTH-1:0]+1] <= WD0[WORD_WIDTH*2-1:WORD_WIDTH];
+        data[A0[ADDR_WIDTH-1:0]] <= WD0[WORD_WIDTH-1:0];
+        data[A1[ADDR_WIDTH-1:0]+3] <= WD1[WORD_WIDTH*4-1:WORD_WIDTH*3];
+        data[A1[ADDR_WIDTH-1:0]+2] <= WD1[WORD_WIDTH*3-1:WORD_WIDTH*2];
+        data[A1[ADDR_WIDTH-1:0]+1] <= WD1[WORD_WIDTH*2-1:WORD_WIDTH];
+        data[A1[ADDR_WIDTH-1:0]] <= WD1[WORD_WIDTH-1:0];
+        data[A2[ADDR_WIDTH-1:0]+3] <= WD2[WORD_WIDTH*4-1:WORD_WIDTH*3];
+        data[A2[ADDR_WIDTH-1:0]+2] <= WD2[WORD_WIDTH*3-1:WORD_WIDTH*2];
+        data[A2[ADDR_WIDTH-1:0]+1] <= WD2[WORD_WIDTH*2-1:WORD_WIDTH];
+        data[A2[ADDR_WIDTH-1:0]] <= WD2[WORD_WIDTH-1:0];
+        data[A3[ADDR_WIDTH-1:0]+3] <= WD3[WORD_WIDTH*4-1:WORD_WIDTH*3];
+        data[A3[ADDR_WIDTH-1:0]+2] <= WD3[WORD_WIDTH*3-1:WORD_WIDTH*2];
+        data[A3[ADDR_WIDTH-1:0]+1] <= WD3[WORD_WIDTH*2-1:WORD_WIDTH];
+        data[A3[ADDR_WIDTH-1:0]] <= WD3[WORD_WIDTH-1:0];
       end
       else if (A[1:0] == 2'b10) begin
-        data[A[ADDR_WIDTH-1:0]+1] <= WD[WORD_WIDTH*2-1:WORD_WIDTH];
-        data[A[ADDR_WIDTH-1:0]] <= WD[WORD_WIDTH-1:0];
+        data[A0[ADDR_WIDTH-1:0]+1] <= WD0[WORD_WIDTH*2-1:WORD_WIDTH];
+        data[A0[ADDR_WIDTH-1:0]] <= WD0[WORD_WIDTH-1:0];
+        data[A1[ADDR_WIDTH-1:0]+1] <= WD1[WORD_WIDTH*2-1:WORD_WIDTH];
+        data[A1[ADDR_WIDTH-1:0]] <= WD1[WORD_WIDTH-1:0];
+        data[A2[ADDR_WIDTH-1:0]+1] <= WD2[WORD_WIDTH*2-1:WORD_WIDTH];
+        data[A2[ADDR_WIDTH-1:0]] <= WD2[WORD_WIDTH-1:0];
+        data[A3[ADDR_WIDTH-1:0]+1] <= WD3[WORD_WIDTH*2-1:WORD_WIDTH];
+        data[A3[ADDR_WIDTH-1:0]] <= WD3[WORD_WIDTH-1:0];
       end
       else begin
-        data[A[ADDR_WIDTH-1:0]] <= WD[WORD_WIDTH-1:0];
+        data[A0[ADDR_WIDTH-1:0]] <= WD0[WORD_WIDTH-1:0];
+        data[A1[ADDR_WIDTH-1:0]] <= WD1[WORD_WIDTH-1:0];
+        data[A2[ADDR_WIDTH-1:0]] <= WD2[WORD_WIDTH-1:0];
+        data[A3[ADDR_WIDTH-1:0]] <= WD3[WORD_WIDTH-1:0];
       end
   end
 end
