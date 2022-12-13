@@ -17,8 +17,6 @@ logic [24:0] T1;
 logic [24:0] T2;
 logic V1;
 logic V2;
-logic [DATA_WIDTH-1:0] DATA_OUT_MEM;
-logic [DATA_WIDTH-1:0] DATA_OUT_CACHE;
 logic [DATA_WIDTH-1:0] DATA_OUT_CACHE_1;
 logic [DATA_WIDTH-1:0] DATA_OUT_CACHE_2;
 logic hit;
@@ -77,7 +75,7 @@ way_merger way_merger(
     .DATA0(DATA_OUT_CACHE_1),
     .DATA1(DATA_OUT_CACHE_2),
     .Tag(A[31:7]),
-    .DATA_OUT(DATA_OUT_CACHE),
+    .DATA_OUT(DATA_OUT),
     .hit(hit)
 );
 
@@ -86,13 +84,10 @@ data_memory_cached data_memory_cached1(
     .A(A),
     .WE(WE),
     .WD(WD),
-    .RD(DATA_OUT_MEM),
     .RD0(RD_0),
     .RD1(RD_1),
     .RD2(RD_2),
     .RD3(RD_3)
 );
-
-assign DATA_OUT = (hit ? DATA_OUT_CACHE:DATA_OUT_MEM);
 
 endmodule
