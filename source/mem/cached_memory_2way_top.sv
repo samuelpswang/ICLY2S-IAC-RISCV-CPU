@@ -6,7 +6,8 @@ module cached_memory_2way_top #(
     input logic [ADDR_WIDTH-1:0] A,
     input logic WE,
     input logic [DATA_WIDTH-1:0] WD,
-    output logic [DATA_WIDTH-1:0] RD
+    output logic [DATA_WIDTH-1:0] RD,
+    output logic stall
 );
 
 logic [DATA_WIDTH-1:0] RD_0;
@@ -89,5 +90,7 @@ data_memory_cached data_memory_cached1(
     .RD2(RD_2),
     .RD3(RD_3)
 );
+
+assign stall = !hit;
 
 endmodule
