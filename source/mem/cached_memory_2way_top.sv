@@ -40,6 +40,10 @@ logic Data_Mem_WE;
 logic B;
 logic hit0;
 logic hit1;
+logic valid0;
+logic valid1;
+logic dirty0;
+logic dirty1;
 
 
 data_cache data_cache_0(
@@ -58,7 +62,8 @@ data_cache data_cache_0(
     .TAG(T1),
     .V(V1),
     .DATA_OUT(DATA_OUT_CACHE_0),
-    .DATA_MEM_WE(Cache_0_Data_Mem_WE),
+    .SET_VALIDITY(valid0),
+    .SET_DIRTY(dirty0),
     .DATA_OUT_0(Cache_0_WD0),
     .DATA_OUT_1(Cache_0_WD1),
     .DATA_OUT_2(Cache_0_WD2),
@@ -81,7 +86,8 @@ data_cache data_cache_1(
     .TAG(T2),
     .V(V2),
     .DATA_OUT(DATA_OUT_CACHE_1),
-    .DATA_MEM_WE(Cache_1_Data_Mem_WE),
+    .SET_VALIDITY(valid0),
+    .SET_DIRTY(dirty0),
     .DATA_OUT_0(Cache_1_WD0),
     .DATA_OUT_1(Cache_1_WD1),
     .DATA_OUT_2(Cache_1_WD2),
@@ -94,7 +100,8 @@ way_divider way_divider(
     .set_num(A[6:4]),
     .U(U),
     .hit0(hit0),
-    .hit1(hit1)
+    .hit1(hit1),
+    .U(U)
 );
 
 way_merger way_merger(
@@ -107,8 +114,10 @@ way_merger way_merger(
     .DATA0(DATA_OUT_CACHE_0),
     .DATA1(DATA_OUT_CACHE_1),
     .Tag(A[31:7]),
-    .Cache_0_Data_Mem_WE(Cache_0_Data_Mem_WE),
-    .Cache_1_Data_Mem_WE(Cache_1_Data_Mem_WE),
+    .valid0(valid0),
+    .valid1(valid1),
+    .dirty0(dirty0),
+    .dirty1(dirty1),
     .Cache_0_WD0(Cache_0_WD0),
     .Cache_0_WD1(Cache_0_WD1),
     .Cache_0_WD2(Cache_0_WD2),
