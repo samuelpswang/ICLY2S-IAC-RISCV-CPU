@@ -35,8 +35,8 @@ logic hit1;
 
 // See if hit
 always_comb begin
-    hit0 = (Tag == TAG0) && V0 && !WE0;
-    hit1 = (Tag == TAG1) && V1 && !WE1;
+    hit0 = (Tag == TAG0) && V0;
+    hit1 = (Tag == TAG1) && V1;
     hit = hit0 | hit1;
 end
 
