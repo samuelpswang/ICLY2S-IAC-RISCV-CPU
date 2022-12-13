@@ -44,6 +44,7 @@ logic valid0;
 logic valid1;
 logic dirty0;
 logic dirty1;
+logic [DATA_WIDTH-1:0] data_mem_addr;
 
 
 data_cache data_cache_0(
@@ -101,7 +102,6 @@ way_divider way_divider(
     .U(U),
     .hit0(hit0),
     .hit1(hit1),
-    .U(U)
 );
 
 way_merger way_merger(
@@ -140,7 +140,7 @@ way_merger way_merger(
 data_memory_cached data_memory_cached(
     .B(B),
     .clk(clk),
-    .A(A),
+    .A(data_mem_addr),
     .WE(Data_Mem_WE),
     .WD0(WD0),
     .WD1(WD1),
@@ -151,6 +151,14 @@ data_memory_cached data_memory_cached(
     .RD2(RD_2),
     .RD3(RD_3)
 );
+
+always_comb begin
+    if (Data_Mem_WE) begin
+        if (!U) data_mem_addr = {T2, A[6:4], 4'b0};
+        else if (U) data_mem_addr = {T1, A[6:4], 4'b0};
+    end
+    else data_mem_addr = A;
+end
 
 assign stall = !hit;
 
