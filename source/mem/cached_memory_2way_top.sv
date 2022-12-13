@@ -38,6 +38,8 @@ logic [DATA_WIDTH-1:0] WD2;
 logic [DATA_WIDTH-1:0] WD3;
 logic Data_Mem_WE;
 logic B;
+logic hit0;
+logic hit1;
 
 
 data_cache data_cache_0(
@@ -90,7 +92,9 @@ way_divider way_divider(
     .clk(clk),
     .WEE(WE),
     .set_num(A[6:4]),
-    .U(U)
+    .U(U),
+    .hit0(hit0),
+    .hit1(hit1)
 );
 
 way_merger way_merger(
@@ -119,7 +123,9 @@ way_merger way_merger(
     .WD0(WD0),
     .WD1(WD1),
     .WD2(WD2),
-    .WD3(WD3)
+    .WD3(WD3),
+    .hit0(hit0),
+    .hit1(hit1)
 );
 
 data_memory_cached data_memory_cached(
