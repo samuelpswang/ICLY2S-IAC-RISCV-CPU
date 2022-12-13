@@ -37,6 +37,7 @@ logic [DATA_WIDTH-1:0] WD1;
 logic [DATA_WIDTH-1:0] WD2;
 logic [DATA_WIDTH-1:0] WD3;
 logic Data_Mem_WE;
+logic B;
 
 
 data_cache data_cache_0(
@@ -105,14 +106,14 @@ way_merger way_merger(
     .Cache_0_Data_Mem_WE(Cache_0_Data_Mem_WE),
     .Cache_1_Data_Mem_WE(Cache_1_Data_Mem_WE),
     .Cache_0_WD0(Cache_0_WD0),
-    .Cache_0_WD1(Cache_0_WD0),
-    .Cache_0_WD2(Cache_0_WD0),
-    .Cache_0_WD3(Cache_0_WD0),
-    .Cache_1_WD0(Cache_1_WD1),
+    .Cache_0_WD1(Cache_0_WD1),
+    .Cache_0_WD2(Cache_0_WD2),
+    .Cache_0_WD3(Cache_0_WD3),
+    .Cache_1_WD0(Cache_1_WD0),
     .Cache_1_WD1(Cache_1_WD1),
-    .Cache_1_WD2(Cache_1_WD1),
-    .Cache_1_WD3(Cache_1_WD1),
-    .DATA_OUT(DATA_OUT),
+    .Cache_1_WD2(Cache_1_WD2),
+    .Cache_1_WD3(Cache_1_WD3),
+    .DATA_OUT(RD),
     .hit(hit),
     .Data_Mem_WE(Data_Mem_WE),
     .WD0(WD0),
@@ -122,9 +123,10 @@ way_merger way_merger(
 );
 
 data_memory_cached data_memory_cached(
+    .B(B),
     .clk(clk),
     .A(A),
-    .WE(WE),
+    .WE(Data_Mem_WE),
     .WD0(WD0),
     .WD1(WD1),
     .WD2(WD2),
