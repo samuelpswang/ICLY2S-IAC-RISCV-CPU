@@ -43,7 +43,7 @@ always_comb begin
 end
 
 always_ff @ (posedge clk) begin
-    if (WEC && !hit) begin
+    if (WEC) begin
         if (WEE) begin
             case (block_offset)
                 2'b00: begin
@@ -81,7 +81,7 @@ always_ff @ (posedge clk) begin
                 end
             endcase
         end
-        else begin
+        else if (!hit) begin
         data_reg_0[set_num] <= DATA_IN_0;
         data_reg_1[set_num] <= DATA_IN_1;
         data_reg_2[set_num] <= DATA_IN_2;
