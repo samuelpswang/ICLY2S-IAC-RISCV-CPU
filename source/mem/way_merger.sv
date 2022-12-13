@@ -27,11 +27,10 @@ module way_merger #(
   output logic [DATA_WIDTH-1:0] WD0,
   output logic [DATA_WIDTH-1:0] WD1,
   output logic [DATA_WIDTH-1:0] WD2,
-  output logic [DATA_WIDTH-1:0] WD3
+  output logic [DATA_WIDTH-1:0] WD3,
+  output logic hit0,
+  output logic hit1
 );
-
-logic hit0;
-logic hit1;
 
 // See if hit
 always_comb begin
