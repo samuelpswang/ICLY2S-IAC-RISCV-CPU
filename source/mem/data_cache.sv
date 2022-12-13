@@ -17,7 +17,8 @@ module data_cache #(
     output logic [TAG_WIDTH-1:0] TAG,
     output logic V,  
     output logic [DATA_WIDTH-1:0] DATA_OUT, // Data for outside
-    output logic DATA_MEM_WE,
+    output logic SET_VALIDITY,
+    output logic SET_DIRTY,
     output logic [DATA_WIDTH-1:0] DATA_OUT_0, // Data 0 for data memory
     output logic [DATA_WIDTH-1:0] DATA_OUT_1,
     output logic [DATA_WIDTH-1:0] DATA_OUT_2,
@@ -32,8 +33,10 @@ logic [7:0] valid_reg;
 logic [TAG_WIDTH-1:0] tag_reg [7:0];
 logic [7:0] dirty_reg;
 
-always_comb
-    DATA_MEM_WE = valid_reg[set_num] && WEC && dirty_reg[set_num];
+always_ff @ (posedge clk) begin
+    SET_VALIDITY <= valid_reg[set_num];
+    SET_DIRTY <= dirty_reg[set_num];
+end
 
 always_comb begin
     DATA_OUT_0 = data_reg_0[set_num];
