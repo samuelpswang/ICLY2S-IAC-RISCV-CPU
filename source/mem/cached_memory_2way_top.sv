@@ -88,7 +88,7 @@ data_cache data_cache_1(
 
 way_divider way_divider(
     .clk(clk),
-    .WEC(WE),
+    .WEE(WE),
     .set_num(A[6:4]),
     .U(U)
 );
