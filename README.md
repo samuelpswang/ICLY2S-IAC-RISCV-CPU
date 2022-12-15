@@ -4,10 +4,10 @@
 
 * Single Cycle
   * [F1 Program (Samuel)](docs/Log_F1_Program.md)
-  * [Program Counter & Instruction Memory ()](docs/Log_Pc_Im.md)
+  * [Program Counter & Instruction Memory (Qidong)](docs/Log_Pc_Im.md)
   * [Control Unit (Samuel)](docs/Log_Control_Unit.md)
   * [ALU (Bharathaan)](docs/Log_Alu.md)
-  * [Data Memory ()](docs/Log_Data_Mem.md)
+  * [Data Memory (Chenglin)](docs/Log_Data_Mem.md)
   * [Debugging Single Cycle CPU (Bharathaan)](docs/Log_Debug_Sc.md)
 * Pipeline
   * [Programs For Pipelined CPUs (Samuel)](docs/Log_Pipeline_Program.md)
@@ -43,10 +43,10 @@ Table 1: Contribution List
 | Repo Setup | `.gitignore`, `.gitkeep`, ... | | | | o | 
 | Entry Script | `debug.sh`, `entrypoint.sh`, ... | | | v | o |
 | F1 Program | `f1_branch.s`, `f1_jump.s`, ... | | | | o |
-| Program Counter & Instruction Memory | `pc_reg.sv`, `instruction_memory.sv`, `pc_reg_tb.cpp` | | | | |
+| Program Counter & Instruction Memory | `pc_reg.sv`, `instruction_memory.sv`, `pc_reg_tb.cpp` | v | o | | |
 | Control Unit | `control_unit.sv`, `extend.sv`, `control_top_tb.cpp` | | | v | o |
 | ALU | `alu.sv`, `reg_file.sv`, `alu_tb.cpp` | | | o |  |
-| Data Memory | `data_memory.sv`, `data_memory_tb.cpp` | | | | |
+| Data Memory | `data_memory.sv`, `data_memory_tb.cpp` | o | v | | |
 | Top-Level Debugging | `rtl.sv`, `ref_tb.cpp`, `f1_tb.cpp` | | | o | v |
 | **Pipeline** | ----- | ----- | ----- | ----- | ----- |
 | Pipeline Programs | `f1_pipeline.s`, `f1_pipeline_debug.s`, `pdf_pipeline.s` | | | v | o | 
@@ -56,8 +56,8 @@ Table 1: Contribution List
 | Memory Stage Registers | `memory_writeback_register.sv` | | | | 
 | Top-Level Debugging | `rtl.sv`, `ref_tb.cpp`, `f1_tb.cpp` | | | o | v |
 | **Data Cache** | ----- | ----- | ----- | ----- | ----- |
-| Data Cache (1-way) | | | | | |
-| Data Cache (2-way, incomplete) | | | | | |
+| Data Cache (1-way) | | o | o | | |
+| Data Cache (2-way, incomplete) | | o | o | | |
 | Top-Level Debugging | `rtl.sv`, `ref_tb.cpp`, `f1_tb.cpp` | v | v | o | | 
 
 ## Specifications
@@ -77,13 +77,13 @@ Table 2: Implemented Instructions
 Table 3: General Specifications
 | Property                | Value  |
 | :---------------------- | :----- |
-| Instruction Memory Size |        |
+| Instruction Memory Size |2^12 bits|
 | Instruction Width       | 32-bit |
-| Data Memory Size        |        |
+| Data Memory Size        |2^17 bits|
 | Data Witdh              | 8-bit  | 
-| Data Cache Size         |        |
-| Data Cache Sets         |        |
-| Data Cache Ways         |        |
-| Data Cache Block Size   |        |
+| Data Cache Size         |128 bytes|
+| Data Cache Sets         |   8    |
+| Data Cache Ways         |   1    |
+| Data Cache Block Size   |4 * 32-bit|
 
 For more detailed detailed specifications, see our [Specification Sheet](docs/Specs.md).
