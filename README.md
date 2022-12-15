@@ -18,6 +18,12 @@
 * Others
   * [Result Verification (Samuel)](docs/Log_Verify.md)
 
+* Individual Statements 
+    * [Samuel (Personal Statement)](docs/Samuel.md)
+    * [Bharathaan (Personal Statement)](docs/Bharathaan.md)
+    * [Chenglin (Personal Statement)](docs/Chenglin.md)
+    * [Qidong (Personal Statement)](docs/Qidong.md)
+
 ## Quick Start
 
 `WIP: How to use entrypoint.sh`
