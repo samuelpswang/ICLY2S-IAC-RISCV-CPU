@@ -16,4 +16,10 @@
 
 ## Two-Way Write-Back 
 
+The Advanced instruction of cache implements 2-way cache with dirty bit which saves more time on storing data and largely decrease the miss rate of the cache. The basic instruction is shown below in figure 1.
 
+|![cache_2way](img/cache_2way_instruction.png)|
+|:--:|
+|Figure 1 : 2-way cache instruction|
+
+The instruction of 2-way allows more data inside the data memory which share the same set number but different addresses to be stored at the same time. This change decrease the miss rate by avoid 
