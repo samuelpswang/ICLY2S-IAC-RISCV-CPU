@@ -1,10 +1,12 @@
 module decode_register(
   // clock signal
   input logic clk,
+  input logic en,
   // decode state
   input logic RegWriteD,
   input logic [1:0] ResultSrcD,
   input logic MemWriteD,
+  input logic MemD,
   input logic JumpD,
   input logic BranchD,
   input logic [3:0] ALUControlD,
@@ -20,6 +22,7 @@ module decode_register(
   output logic RegWriteE,
   output logic [1:0] ResultSrcE,
   output logic MemWriteE,
+  output logic MemE,
   output logic JumpE,
   output logic BranchE,
   output logic [3:0] ALUControlE,
@@ -34,10 +37,12 @@ module decode_register(
 );
 
 always_ff @ (negedge clk) begin
+  if(en) begin
   PCPlus4E <= PCPlus4D;
   RegWriteE <= RegWriteD;
   ResultSrcE <= ResultSrcD;
   MemWriteE <= MemWriteD;
+  MemE <= MemD;
   JumpE <= JumpD;
   BranchE <= BranchD;
   ALUControlE <= ALUControlD;
@@ -49,6 +54,7 @@ always_ff @ (negedge clk) begin
   RdE <= RdD;
   ImmExtE <= ImmExtD;
   PCPlus4E <= PCPlus4D;
+  end
 end
   
 endmodule

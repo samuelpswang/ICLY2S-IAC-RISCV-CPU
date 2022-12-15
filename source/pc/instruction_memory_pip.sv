@@ -3,6 +3,7 @@ module instruction_memory_pip #(
     parameter ADDR_WIDTH = 32
 )(
     input logic clk,
+    input logic en,
     input logic [ADDR_WIDTH-1:0] PCF,
     input logic [INSTR_WIDTH-1:0] INSTRF,
     output logic [ADDR_WIDTH-1:0] PCD,
@@ -11,8 +12,10 @@ module instruction_memory_pip #(
 );
 
 always_ff @(posedge clk) begin
+    if(en) begin
     INSTRD <= INSTRF;
     PCD <= PCF;
     PCPLUS4D <= PCF + 32'd4;
+    end
 end
 endmodule

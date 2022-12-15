@@ -31,6 +31,7 @@ assign label = JumpE ? (BranchE ? ALUResultE : PCE+ImmExtE ) : (BranchE ? PCE+Im
 
 pc_reg PC(
     .clk(clk),
+    .en(!stall),
     .rst(rst),
     .PCsrc((BranchE && !EQ) || JumpE),
     .label(label),
@@ -61,6 +62,7 @@ logic [ADDR_WIDTH-1:0] PCPlus4D;
 
 instruction_memory_pip fetch_register(
     .clk(clk),
+    .en(!stall),
     .PCF(PCF),
     .INSTRF(INSTRF),
     .PCD(PCD),
@@ -80,6 +82,7 @@ logic [6:0] funct7 = INSTRD[31:25];
 logic RegWriteD;
 logic [1:0] ResultSrcD;
 logic MemWriteD;
+logic MemD;
 logic JumpD;
 logic BranchD;
 logic [3:0] ALUControlD;
@@ -94,6 +97,7 @@ control_unit control_unit(
     .RegWrite(RegWriteD),
     .ResultSrc(ResultSrcD),
     .MemWrite(MemWriteD),
+    .Mem(MemD),
     .Jump(JumpD),
     .Branch(BranchD),
     .ALUControl(ALUControlD),
@@ -157,6 +161,7 @@ extend sign_extend(
 logic RegWriteE;
 logic [1:0] ResultSrcE;
 logic MemWriteE;
+logic MemE;
 logic JumpE;
 logic BranchE;
 logic [3:0] ALUControlE;
@@ -171,9 +176,11 @@ logic [31:0] PCPlus4E;
 
 decode_register decode_register(
     .clk(clk),
+    .en(!stall),
     .RegWriteD(RegWriteD),
     .ResultSrcD(ResultSrcD),
     .MemWriteD(MemWriteD),
+    .MemD(MemD),
     .JumpD(JumpD),
     .BranchD(BranchD),
     .ALUControlD(ALUControlD),
@@ -188,6 +195,7 @@ decode_register decode_register(
     .RegWriteE(RegWriteE),
     .ResultSrcE(ResultSrcE),
     .MemWriteE(MemWriteE),
+    .MemE(MemE),
     .JumpE(JumpE),
     .BranchE(BranchE),
     .ALUControlE(ALUControlE),
@@ -227,6 +235,7 @@ alu ALU(
 logic RegWriteM;
 logic [1:0] ResultSrcM;
 logic MemWriteM;
+logic MemM;
 logic BM;
 logic [DATA_WIDTH-1:0] ALUResultM;
 logic [DATA_WIDTH-1:0] WriteDataM;
@@ -236,9 +245,11 @@ logic [ADDR_WIDTH-1:0] PCPlus4M;
 
 memory_stage_register memory_register(
     .clk(clk),
+    .en(!stall),
     .RegWriteE(RegWriteE),
     .ResultSrcE(ResultSrcE),
     .MemWriteE(MemWriteE),
+    .MemE(MemE),
     .ALUResultE(ALUResultE),
     .BE(BE),
     .WriteDataE(RD2E),
@@ -247,6 +258,7 @@ memory_stage_register memory_register(
     .RegWriteM(RegWriteM),
     .ResultSrcM(ResultSrcM),
     .MemWriteM(MemWriteM),
+    .MemM(MemM),
     .BM(BM),
     .ALUResultM(ALUResultM),
     .WriteDataM(WriteDataM),
@@ -260,17 +272,17 @@ memory_stage_register memory_register(
 // Data Memory
 
 logic [DATA_WIDTH-1:0] ReadDataM;
+logic stall;
 
-cached_memory_2way_top data_memory(
+cached_memory_1way_top data_memory(
     .clk(clk),
     .A(ALUResultM),
     .WE(MemWriteM),
-    .TAG(ALUResultM[31:7]),
-    .SET(ALUResultM[6:4]),
-    .BLOCK_OFFSET(ALUResultM[3:2]),
     .WD(WriteDataM),
     .RD(ReadDataM),
-    .B(BM)
+    .B(BM),
+    .M(MemM),
+    .stall(stall)
 );
 
 //end
@@ -303,6 +315,7 @@ logic [31:0] PCPlus4W;
 
 memory_writeback_register writeback_register(
     .clk(clk),
+    .en(!stall),
     .RegWriteM(RegWriteM),
     .ResultSrcM(ResultSrcM),
     .ALUResultM(ALUResultM),

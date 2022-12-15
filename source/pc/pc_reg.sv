@@ -3,6 +3,7 @@ module pc_reg #(
   parameter IMMO_WIDTH = 32
 )(
   input logic clk,
+  input logic en,
   input logic rst,
   input logic PCsrc,
   input logic [IMMO_WIDTH-1:0] label,
@@ -14,8 +15,10 @@ logic [ADDR_WIDTH-1:0] next_pc;
 assign next_pc = (PCsrc ? label : pc + 32'd4);
 
 always_ff @(posedge clk) begin
+  if(en) begin
   if (rst||pc == {8{4'hF}}) pc <= {32'hBFC00000}; 
   else pc <= next_pc;
+  end
 end
 
 endmodule

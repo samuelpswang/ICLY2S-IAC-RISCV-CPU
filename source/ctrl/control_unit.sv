@@ -5,6 +5,7 @@ module control_unit(
   output logic RegWrite,
   output logic [1:0] ResultSrc,
   output logic MemWrite,
+  output logic Mem,
   output logic Jump,
   output logic Branch,
   output logic [3:0] ALUControl,
@@ -19,6 +20,7 @@ always_comb
       RegWrite = 1'b1;
       ResultSrc = 2'b00;
       MemWrite = 1'b0;
+      Mem = 1'b0;
       Jump = 1'b0;
       Branch = 1'b0;
       ALUSrc = 1'b0;
@@ -33,6 +35,7 @@ always_comb
       RegWrite = 1'b0;
       ResultSrc = 2'b00;
       MemWrite = 1'b0;
+      Mem = 1'b0;
       Jump = 1'b0;
       Branch = 1'b1;
       ALUSrc = 1'b0;
@@ -46,6 +49,7 @@ always_comb
       RegWrite = 1'b1;
       ResultSrc = 2'b01;
       MemWrite = 1'b0;
+      Mem = 1'b1;
       Jump = 1'b0;
       Branch = 1'b0;
       ALUControl = 4'b0000;
@@ -59,6 +63,7 @@ always_comb
       RegWrite = 1'b1;
       ResultSrc = 2'b00;
       MemWrite = 1'b0;
+      Mem = 1'b0;
       Jump = 1'b0;
       Branch = 1'b0;
       ALUSrc = 1'b1;
@@ -73,6 +78,7 @@ always_comb
       RegWrite = 1'b0;
       ResultSrc = 2'b00; 
       MemWrite = 1'b1;
+      Mem = 1'b1;
       Jump = 1'b0;
       Branch = 1'b0;
       ALUControl = 4'b0000;
@@ -86,6 +92,7 @@ always_comb
       RegWrite = 1'b1;
       ResultSrc = 2'b10;
       MemWrite = 1'b0;
+      Mem = 1'b0;
       Jump = 1'b1;
       Branch = 1'b1;
       ALUControl = 4'b1001;
@@ -98,6 +105,7 @@ always_comb
       RegWrite = 1'b1;
       ResultSrc = 2'b10;
       MemWrite = 1'b0;
+      Mem = 1'b0;
       Jump = 1'b1;
       Branch = 1'b0;
       ALUControl = 4'b0000;
@@ -110,6 +118,7 @@ always_comb
       RegWrite = 1'b1;
       ResultSrc = 2'b00;
       MemWrite = 1'b0;
+      Mem = 1'b1;
       Jump = 1'b0;
       Branch = 1'b0;
       ALUControl = 4'b1010;
@@ -123,6 +132,7 @@ always_comb
       RegWrite = 1'b0;
       ResultSrc = 2'b00;
       MemWrite = 1'b0;
+      Mem = 1'b0;
       Jump = 1'b0;
       Branch = 1'b0;
       ALUControl = 4'b1111;

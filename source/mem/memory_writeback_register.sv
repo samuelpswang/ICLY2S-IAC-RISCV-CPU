@@ -1,5 +1,6 @@
 module memory_writeback_register(
   input logic clk,
+  input logic en,
   input logic RegWriteM,
   input logic [1:0] ResultSrcM,
   input logic [31:0] ALUResultM,
@@ -15,12 +16,14 @@ module memory_writeback_register(
 );
 
 always_ff @ (posedge clk) begin
+  if(en) begin
   RegWriteW <= RegWriteM;
   ResultSrcW <= ResultSrcM;
   ALUResultW <= ALUResultM;
   ReadDataW <= ReadDataM;
   RdW <= RdM;
   PCPlus4W <= PCPlus4M;
+  end
 end
 
 endmodule

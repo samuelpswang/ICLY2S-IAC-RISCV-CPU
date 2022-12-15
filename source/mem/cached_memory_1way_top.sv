@@ -4,6 +4,8 @@ module cached_memory_1way_top #(
 )(
     input logic clk,
     input logic [ADDR_WIDTH-1:0] A,
+    input logic B,
+    input logic M,
     input logic WE,
     input logic [DATA_WIDTH-1:0] WD,
     output logic [DATA_WIDTH-1:0] RD,
@@ -11,7 +13,6 @@ module cached_memory_1way_top #(
 );
 
 logic hit;
-logic B;
 logic [DATA_WIDTH-1:0] mem_DATA_OUT_0;
 logic [DATA_WIDTH-1:0] mem_DATA_OUT_1;
 logic [DATA_WIDTH-1:0] mem_DATA_OUT_2;
@@ -21,11 +22,8 @@ logic [24:0] TAG;
 
 always_comb begin
     hit = (A[31:7] == TAG) & V;
-    stall = !hit;
-end
-
-always_comb begin
-    if (stall) RD = 32'b0;
+    if(M) stall = !hit;
+    else stall = 0;
 end
 
 

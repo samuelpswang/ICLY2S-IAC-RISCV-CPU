@@ -4,9 +4,11 @@ module memory_stage_register #(
 
 )(
     input logic clk,
+    input logic en,
     input logic RegWriteE,
     input logic [1:0] ResultSrcE,
     input logic MemWriteE,
+    input logic MemE,
     input logic [DATA_WIDTH-1:0] ALUResultE,
     input logic BE,
     input logic [DATA_WIDTH-1:0] WriteDataE,
@@ -15,6 +17,7 @@ module memory_stage_register #(
     output logic RegWriteM,
     output logic [1:0] ResultSrcM,
     output logic MemWriteM,
+    output logic MemM,
     output logic BM,
     output logic [DATA_WIDTH-1:0] ALUResultM,
     output logic [DATA_WIDTH-1:0] WriteDataM,
@@ -24,13 +27,16 @@ module memory_stage_register #(
 );
     
     always_ff @ (posedge clk) begin
+        if(en) begin
         RegWriteM <= RegWriteE;
         ResultSrcM <= ResultSrcE;
         MemWriteM <= MemWriteE;
+        MemM <= MemE;
         ALUResultM <= ALUResultE;
         BM <= BE;
         WriteDataM <= WriteDataE;
         RdM <= RdE;
         PCPlus4M <= PCPlus4E;
+        end
     end
 endmodule

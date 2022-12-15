@@ -42,19 +42,15 @@ end
 
 always_ff @ (posedge clk) begin
   if (WE) begin
-      if (A[1:0] == 2'b00) begin
+      if (B) begin
+      data[A[ADDR_WIDTH-1:0]] <= WD[7:0];
+    end
+    else begin
         data[A[ADDR_WIDTH-1:0]+3] <= WD[WORD_WIDTH*4-1:WORD_WIDTH*3];
         data[A[ADDR_WIDTH-1:0]+2] <= WD[WORD_WIDTH*3-1:WORD_WIDTH*2];
         data[A[ADDR_WIDTH-1:0]+1] <= WD[WORD_WIDTH*2-1:WORD_WIDTH];
         data[A[ADDR_WIDTH-1:0]] <= WD[WORD_WIDTH-1:0];
-      end
-      else if (A[1:0] == 2'b10) begin
-        data[A[ADDR_WIDTH-1:0]+1] <= WD[WORD_WIDTH*2-1:WORD_WIDTH];
-        data[A[ADDR_WIDTH-1:0]] <= WD[WORD_WIDTH-1:0];
-      end
-      else begin
-        data[A[ADDR_WIDTH-1:0]] <= WD[WORD_WIDTH-1:0];
-      end
+    end
   end
 end
 
