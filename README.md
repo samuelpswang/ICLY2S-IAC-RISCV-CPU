@@ -50,10 +50,10 @@ Table 1: Contribution List
 | Top-Level Debugging | `rtl.sv`, `ref_tb.cpp`, `f1_tb.cpp` | | | o | v |
 | **Pipeline** | ----- | ----- | ----- | ----- | ----- |
 | Pipeline Programs | `f1_pipeline.s`, `f1_pipeline_debug.s`, `pdf_pipeline.s` | | | v | o | 
-| Fetch Stage Registers | `instruction_memory_pip.sv` | | | | | 
+| Fetch Stage Registers | `instruction_memory_pip.sv` | |o| | | 
 | Decode Stage Registers | `decode_register.sv` | | | | o | 
 | Execute Stage Registers | `memory_stage_register.sv` | | | o | |
-| Memory Stage Registers | `memory_writeback_register.sv` | | | | 
+| Memory Stage Registers | `memory_writeback_register.sv` |o| | | 
 | Top-Level Debugging | `rtl.sv`, `ref_tb.cpp`, `f1_tb.cpp` | | | o | v |
 | **Data Cache** | ----- | ----- | ----- | ----- | ----- |
 | Data Cache (1-way) | | o | o | | |
