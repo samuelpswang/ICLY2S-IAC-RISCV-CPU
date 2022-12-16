@@ -1,5 +1,6 @@
 # os
 .DS_Store
+*:Zone.Identifier
 
 # ide
 **/.vscode/**
@@ -12,3 +13,6 @@
 **/build/**
 **/obj_dir/**
 *.vcd
+
+program/data.mem
+program/instr.hex
