@@ -26,7 +26,23 @@
 
 ## Quick Start
 
-`WIP: How to use entrypoint.sh`
+[`Entrypoint.sh`](entrypoint.sh) is a shell written to easily load different sets of instructions & data into the processor. Three modes are available: `f1`, `ref`, and `comp`. Each mode runs the F1 program, the reference program, or the component specific testbench respectively. See Table 1 below for a list of operations you can run with the entrypoint.sh shell.
+
+Table 1: Entrypoint.sh Usage
+| Command | What It Does | Remarks |
+| :------ | :----------- | :------ |
+| `source entrypoint.sh f1` | Runs F1 Lights program. | 
+| `source entrypoint.sh f1 debug` | Runs F1 Lights debug program, which shows special state when LFSR subroutine is running. |  |
+| `source entrypoint.sh ref gaussian` | Runs reference program, loading gaussian waveform into memory. |  |
+| `source entrypoint.sh ref noisy` | Runs reference program, loading noisy waveform into memory. |  |
+| `source entrypoint.sh ref sine` | Runs reference program, loading sine waveform into memory. |  |
+| `source entrypoint.sh ref triangle` | Runs reference program, loading triangle waveform into memory. |  |
+| `source entrypoint.sh comp alu` | Runs ALU component testbench. | Only works in v2.0-pipeline release. |
+| `source entrypoint.sh comp ctrl` | Runs Control Unit component testbench. | Only works in v2.0-pipeline release. |
+| `source entrypoint.sh comp mem` | Runs Data Memory component testbench. | Only works in v2.0-pipeline release. |
+| `source entrypoint.sh comp pc` | Runs Program Counter component testbench. | Only works in v2.0-pipeline release. |
+
+If `entrypoint.sh` does not work, you should configure the `debug.sh` script to execute what you want. Note that the instruction memory loads from `program/instr.hex` and the data memory loads from `program/data.mem`. These were dynamically created by `entrypoint.sh`, which means you would need to copy the data over and rename before running.
 
 ## Overview
 
@@ -64,7 +80,7 @@ See the following embedded videos, for the F1 program and the 4 waveforms PDF pr
 
 **Note:** o = Main Contributor; v = Co-Author.
 
-Table 1: Contribution List
+Table 2: Contribution List
 | Task       | Files | Chenglin | Qidong | Bharathaan | Samuel |
 | :--------- | :---- | :------: | :----: | :--------: | :----: |
 | **Single Cycle** | ----- | ----- | ----- | ----- | ----- |
@@ -90,7 +106,7 @@ Table 1: Contribution List
 
 ## Specifications
 
-Table 2: Implemented Instructions
+Table 3: Implemented Instructions
 | Type | Instructions                      |
 | :--- | :-------------------------------- |
 | R    | `add`, `xor`                      |
@@ -100,7 +116,7 @@ Table 2: Implemented Instructions
 | U    | `lui`                             |
 | J    | `jal`, `jalr`                     |
 
-Table 3: General Specifications
+Table 4: General Specifications
 | Property                | Value      |
 | :---------------------- | :--------- |
 | Instruction Memory Size | 2^12 bits  |
@@ -116,4 +132,52 @@ For more detailed detailed specifications, see our [Specification Sheet](docs/Sp
 
 ## File Structure
 
-...
+**Ideal Final File Structure**
+
+```
+root
+├── docs/
+│   ├── img/
+│   ├── ipynb/
+│   └── *.md
+├── program/
+│   ├── f1/
+│   ├── ref/
+│   ├── *.sh
+│   └── *.mk
+├── source/
+│   ├── alu/
+│   ├── ctrl/
+│   ├── mem/
+│   ├── pc/
+│   └── rtl.sv
+├── testbench/
+│   ├── alu/
+│   ├── ctrl/
+│   ├── mem/
+│   ├── pc/
+│   └── rtl/
+├── .gitignore
+├── entrypoint.sh
+├── entrypoint.cfg
+├── debug.sh
+├── debug.cfg
+├── vbuddy.cfg
+└── README.md
+```
+
+**Directories**
+
+1. `docs`: directory that holds information about the project and its source files.
+2. `source`: directory that holds all the .sv design files.
+3. `testbench`: directory that holds the testbench for each component and overall design.
+4. `program`: directory that holds the .s source files for program and data to be loaded into the processor.
+
+**Notable Files**
+
+1. `README.md`: overall readme document.
+2. `.gitignore`: standard file to ignore verilator obj_dir, .vcd, and other os files.
+3. `entrypoint.sh`: shell script that builds and runs the design, with easy debugging features.
+4. `entrypoint.config`: configuration file for verilator arguments, such as suppressing warnings and others.
+5. `debug.sh`: fall back for entrypoint.sh.
+6. `source/rtl.sv`: top level file for our design.
