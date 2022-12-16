@@ -26,7 +26,7 @@ int main(int argc, char **argv, char **env){
     top->rst = 0;
 
     // run simulation for many clock cycles
-    for (int i = 0; i < 1000000; i++)
+    for (int i = 0; i < 1000000; i++){
         for(clk=0;clk<2;clk++){
             // in ps
             tfp->dump (2*i+clk);

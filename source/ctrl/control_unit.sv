@@ -78,7 +78,7 @@ always_comb
       RegWrite = 1'b0;
       ResultSrc = 2'b00; 
       MemWrite = 1'b1;
-      Mem = 1'b1;
+      Mem = 1'b0;
       Jump = 1'b0;
       Branch = 1'b0;
       ALUControl = 4'b0000;

@@ -26,6 +26,11 @@ logic [DATA_WIDTH-1:0] A3;
   else RD = {24'b0, data[A[ADDR_WIDTH-1:0]]};
 end*/
 
+initial begin
+  $display("[DUT] Loading data memory from program/ref/gaussian.mem file.");
+  $readmemh("program/ref/sine.mem", data, 65536);
+end
+
 always_comb begin
     A0 = {A[31:4], {2'b0}, {2'b0}};
     A1 = {A[31:4], {2'b01}, {2'b0}};

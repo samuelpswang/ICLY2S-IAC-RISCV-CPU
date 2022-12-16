@@ -21,8 +21,10 @@ always_comb begin
   a0 = reg_data[10];
 end
 
-always_ff @ (posedge clk)
-  if (WE3 && AD3 != 5'd0) reg_data[AD3] <= WD3; 
-  else reg_data[AD3] <= 32'b0;
+always_ff @ (negedge clk)
+  if (WE3) begin
+    if (AD3 == 5'b0) reg_data[AD3] <= 32'b0; 
+    else reg_data[AD3] <= WD3; 
+  end
 
 endmodule
