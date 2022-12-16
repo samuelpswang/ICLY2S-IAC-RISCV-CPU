@@ -27,8 +27,8 @@ logic [DATA_WIDTH-1:0] A3;
 end*/
 
 initial begin
-  $display("[DUT] Loading data memory from program/ref/gaussian.mem file.");
-  $readmemh("program/ref/sine.mem", data, 65536);
+  $display("[DUT] Loading data memory from program/data.mem file.");
+  $readmemh("program/data.mem", data, 65536);
 end
 
 always_comb begin

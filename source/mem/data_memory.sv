@@ -14,8 +14,8 @@ module data_memory #(
 logic [WORD_WIDTH-1:0] data [2**ADDR_WIDTH-1:0];
 
 initial begin
-  $display("[DUT] Loading data memory from program/ref/gaussian.mem file.");
-  $readmemh("program/ref/gaussian.mem", data, 65536);
+  $display("[DUT] Loading data memory from program/data.mem file.");
+  $readmemh("program/data.mem", data, 65536);
 end
 
 assign RD = {data[A[ADDR_WIDTH-1:0]+3], data[A[ADDR_WIDTH-1:0]+2], data[A[ADDR_WIDTH-1:0]+1], data[A[ADDR_WIDTH-1:0]]};

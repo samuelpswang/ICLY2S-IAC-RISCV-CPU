@@ -12,3 +12,6 @@
 **/build/**
 **/obj_dir/**
 *.vcd
+
+program/data.mem
+program/instr.hex
