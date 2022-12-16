@@ -5,7 +5,7 @@
 Note that only the first commit that contains the majority of the contribution is linked after the item listed below.
 
 * Infrastructure
-  * Written overall documentation: README.md and releases. (d9fcad91085f0f3525649f62ab7182a64270b549)
+  * Written overall documentation: README.md and releases. samuelpswang@d9fcad91085f0f3525649f62ab7182a64270b549
   * Created repo workflow: file structures, branches, and gitignores. (42d89f1c9ee92c2f03e9740f0fec810aded759c0)
   * Created entry script: debug.sh and entrypoint.sh. (516247088ea9224b982fd84529b77bec009aee98)
 * Single Cycle
