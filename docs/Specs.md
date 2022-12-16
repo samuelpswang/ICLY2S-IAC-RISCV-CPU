@@ -4,10 +4,12 @@
 
 | Code | Operation | Input | Output |
 | :--- | :-------- | :---- | :----- |
-| 0b00 | I-type Signed Extension | 12-bit Signed | 32-bit Signed |
-| 0b01 | B-type Signed Extension | 12-bit Signed | 32-bit Signed |
-| 0b10 | S-type Signed Extension | 12-bit Signed | 32-bit Signed |
-| 0b10 | NULL | N/A | 32'd0 |
+| 0b000 | Sign Extend I-type | 12-bit Signed | 32-bit Signed |
+| 0b001 | Sign Extend B-type | 12-bit Signed | 32-bit Signed |
+| 0b010 | Sign Extend S-type | 12-bit Signed | 32-bit Signed |
+| 0b010 | Sign Extend J-type | 12-bit Signed | 32-bit Signed |
+| 0b100 | Extend Lower 0s U-type | 12-bit Unsigned | 32-bit Unsigned |
+| Else | NULL | N/A | 32'd0 |
 
 **Table 2: `ALUControl`**
 
