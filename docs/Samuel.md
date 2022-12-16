@@ -12,8 +12,8 @@ Note that only the first commit that contains the majority of the contribution i
   * F1 program. ([44277b5](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/44277b53ac53b2dd3e0c6704910e06567c711ef1))
   * Control unit and sign exntend components. ([3563a6a](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/3563a6a820932df696d60c43c184cd93b3ffc869))
 * Pipelined
-  * F1 program and reference program pipeline versions. ([b4cb93a](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/b4cb93a7cef3078ac6c063301441267859d38abc))(b4cb93a7cef3078ac6c063301441267859d38abc)
-  * Decode stage pipeline register. ([67dfab7](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/b4cb93a7cef3078ac6c063301441267859d38abc))(67dfab7e1099a5a7e6945309e3a28450a93a1692)
+  * F1 program and reference program pipeline versions. ([b4cb93a](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/b4cb93a7cef3078ac6c063301441267859d38abc))
+  * Decode stage pipeline register. ([67dfab7](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/b4cb93a7cef3078ac6c063301441267859d38abc))
   * Overall debugging. (various commits)
 
 ## What I Learned
