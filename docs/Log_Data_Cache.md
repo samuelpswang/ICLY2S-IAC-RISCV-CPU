@@ -122,7 +122,8 @@ The table 1 below illustrates different situations the cache may meet when there
 * The cache_WE_write_back is 1:
   * The miss happened (V is either 1 or 0) when there is a load instruction, the cache needs to reload the data from the data memory.
 
-From this table, we can work out the logic operation from inputs and outputs to get two WE signals: 
+From this table, we can work out the logic operation from inputs and outputs to get two WE signals:
+
 1. Data_Mem_WE = V & !hit
 2. cache_WE_write_baCK = !WE & !hit  
 
@@ -149,3 +150,20 @@ The dirty bit owns information about origin of the data stored in the cache, whi
 In the program, the dirty bit exists as a register which store bits for different sets. The bit changes to 1  when the data is from outside of the cache and to 0 when it is from the memory. This dirty bit is logically ANDed with the Data_Mem_WE memtioned in Assitional WE Signals to be the final Write Enable signal for the memory.
 
 ## Challenges encountered
+
+* Challenges in designing:
+  * We initially started with a two-way design. The control signal evaluation can get quite complicated. But we had several brainstormings and overcame it.
+  * Initially we had misunderstandings about the cache design. For example, we thought external write data only goes to data memory, and cache is just for external read. We also thought read data can go directly from data memory to output, before being stored in the cache. This was made clear by talking with our teammates.
+  * After knowing how a real-world cache would look like, we had more complicated challenges. Such as adding stall signal, implementing LRU, providing WE for data memory at the right time. We managed to come up with a version that made sense to us.
+* Challenges in debugging:
+  * The main reason we did not manage to finish the two-way write-back design is that debugging became really difficult, due to strange behaviours in the waveform.
+  * One major issue is that at times there can be a weird delay coming from combinational logic. And sometimes the waveform does not make sense for what we wrote in the sv file.
+  * Below is an example that demonstrates one of these weird behaviours. Hit0 did not go down as V0 went down, which does not make sense. We eventually ran out of time and compromised by creating a one-way write-through cache instead.
+
+|![cache_debug_sv](img/cache_debug_sv.jpg)|
+|:--:|
+|Figure 4 : Combinational logic statements|
+
+|![cache_debug_waveform](img/cache_debug_waveform.jpg)|
+|:--:|
+|Figure 5 : Waveform|
