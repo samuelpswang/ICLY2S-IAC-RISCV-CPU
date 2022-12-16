@@ -13,7 +13,7 @@
 
 ## Data Cache
 
-* The data cache has 11 inputs and 3 outputs. 
+* The data cache has 11 inputs and 3 outputs.
 * The inputs are:
   * clk, clock signal
   * WEE, write enable from outside
@@ -92,22 +92,21 @@
 |:--:|
 |Figure 2 : One-Way Cache Top Waveform|
 
-
 ## Original Two-Way Cache Design
 
-The Advanced instruction of cache implements 2-way cache with dirty bit which saves more time on storing data and largely decrease the miss rate of the cache. The basic instruction is shown below in figure 3.
+The advanced design of cache implements 2-way cache with dirty bit which saves more time on storing data and largely decrease the miss rate of the cache. The schematic is shown below in figure 3.
 
 |![cache_2way](img/cache_2way_top_level.png)|
 |:--:|
 |Figure 3 : 2-way cache top level design|
 
-**1. Difference in Instruction**
+**1. Difference in structure**
 
-* The instruction of 2-way allows more data inside the data memory which share the same set number but different addresses to be stored at the same time. This change decrease the miss rate by avoiding the continous replacements in the same set caused by the program. 
+* The structure of 2-way allows more data inside the data memory which share the same set number but different addresses to be stored at the same time. This change decrease the miss rate by avoiding the continous replacements in the same set caused by the program.
 
-* The usage of dirty bit reduces the frequncy of storing data into the data memory, because there is no direct input linked to the data memory and only when the data that is going to be replaced in the cache will be stored. This saves time on unecessary stores into the data memory. 
+* The usage of dirty bit reduces the frequncy of storing data into the data memory, because there is no direct input linked to the data memory and only when the data that is going to be replaced in the cache will be stored. This saves time on unecessary stores into the data memory.
 
-* The additional U (Least Recent Use) is used to storing the data in order in 2-way instruction. The least recent used data will always be replaced fisrt.
+* The additional U (Least Recent Used) is used to store the data in order in 2-way design. The least recent used data will always be replaced fisrt.
 
 **2. Explaination of Program of additional components**
 
