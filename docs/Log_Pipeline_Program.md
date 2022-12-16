@@ -15,6 +15,10 @@ This is implemented exacly as described and commented accordingly. See [f1_pipel
 
 The program worked as expected on vBuddy.
 
+| ![Figure 1: Pipeline Design](img/pipeline-processor.png) |
+| :------------------------------------------------------: |
+| Figure 1: Pipeline Design                                |
+
 ## Challenges
 
 **1/ NOPs Were Needed After Jump Or Branch:** It was originally thought that nops were only needed after ALU operations, but it was observed that the processor always executed one additional instruction after branch or jump. A review of the design was conducted and it was noted that 1 nop was needed to avoid this as pc is only set during the execution stage.
