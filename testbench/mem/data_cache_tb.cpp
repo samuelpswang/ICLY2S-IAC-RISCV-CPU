@@ -13,7 +13,6 @@ int main(int argc, char **argv, char **env){
     tfp->open("Vdata_cache.vcd");
 
     top->clk = clk;
-    top->WEC = 0;
     top->WEE = 0;
     top->tag = 0;
     top->set_num = 0b001;
@@ -35,15 +34,12 @@ int main(int argc, char **argv, char **env){
         }
 
     if(i == 1){
-        top->WEC = 1;
         top->WEE = 1;
     }
     else if(i == 2){
-        top->WEC = 1;
         top->WEE = 0;
     }
     else{
-        top->WEC = 0;
         top->WEE = 0;
     }
 
