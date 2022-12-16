@@ -2,10 +2,12 @@
 
 ## Table of Contents
 
+### Processor
+
 * Single Cycle
   * [F1 Program (Samuel)](docs/Log_F1_Program.md)
   * [Program Counter & Instruction Memory (Qidong)](docs/Log_Pc_Im.md)
-  * [Control Unit (Samuel)](docs/Log_Control_Unit.md)
+  * [Control Unit (Samuel, Bharathaan)](docs/Log_Control_Unit.md)
   * [ALU (Bharathaan)](docs/Log_Alu.md)
   * [Data Memory (Chenglin)](docs/Log_Data_Mem.md)
   * [Debugging Single Cycle CPU (Bharathaan)](docs/Log_Debug_Sc.md)
@@ -18,11 +20,12 @@
 * Others
   * [Result Verification (Samuel)](docs/Log_Verify.md)
 
-* Individual Statements 
-    * [Samuel (Personal Statement)](docs/Samuel.md)
-    * [Bharathaan (Personal Statement)](docs/Bharathaan.md)
-    * [Chenglin (Personal Statement)](docs/Chenglin.md)
-    * [Qidong (Personal Statement)](docs/Qidong.md)
+### Individual Statements
+
+* [Personal Statement: Chenglin](docs/Chenglin.md)
+* [Personal Statement: Qidong](docs/Qidong.md)
+* [Personal Statement: Bharathaan](docs/Bharathaan.md)
+* [Personal Statement: Samuel](docs/Samuel.md)
 
 ## Quick Start
 
@@ -62,8 +65,6 @@ Table 1: Contribution List
 
 ## Specifications
 
-`WIP: 1) Implemented instructions, 2) Signals meaning 3) pipeline & data cache`
-
 Table 2: Implemented Instructions
 | Type | Instructions                      |
 | :--- | :-------------------------------- |
@@ -75,15 +76,15 @@ Table 2: Implemented Instructions
 | J    | `jal`, `jalr`                     |
 
 Table 3: General Specifications
-| Property                | Value  |
-| :---------------------- | :----- |
-| Instruction Memory Size |2^12 bits|
-| Instruction Width       | 32-bit |
-| Data Memory Size        |2^17 bits|
-| Data Witdh              | 8-bit  | 
-| Data Cache Size         |128 bytes|
-| Data Cache Sets         |   8    |
-| Data Cache Ways         |   1    |
-| Data Cache Block Size   |4 * 32-bit|
+| Property                | Value      |
+| :---------------------- | :--------- |
+| Instruction Memory Size | 2^12 bits  |
+| Instruction Width       | 32-bit     |
+| Data Memory Size        | 2^17 bits  |
+| Data Witdh              | 8-bit      | 
+| Data Cache Size         | 128 bytes  |
+| Data Cache Sets         | 8          |
+| Data Cache Ways         | 1          |
+| Data Cache Block Size   | 4 * 32-bit |
 
 For more detailed detailed specifications, see our [Specification Sheet](docs/Specs.md).
