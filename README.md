@@ -50,7 +50,7 @@ If `entrypoint.sh` does not work, you should configure the `debug.sh` script to 
 
 * Single Cycle: [`v1.0-single-cycle`](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/releases/tag/v1.0-single-cycle)
 * Pipeline: [`v2.0-pipeline`](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/releases/tag/v2.0-pipeline)
-* Data Cache (merged to main):
+* Data Cache (merged to main): [`v3.0-data-cache`](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/releases/tag/v3.0-data-cache)
 
 ### Evidence Of Working Processor
 
