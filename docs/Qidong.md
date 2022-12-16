@@ -19,6 +19,7 @@
     * Way merger which combine 2 ways of cache ([merger](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/c6e30179c477256326ea5e0ffecfcf54488804a7))
     * Top level linkage between caches and data memory ([cache top](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/86b8021c9c9a81caaf7e4e42435b1856ee70ee0c))
     * testbench([testbench](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/e3c18d78593ba812df5a4ba638087e15af9c8fb0))
+* Debugging(various commits)
 * Note: we forgot to add co-author in the commit
 
 ## Special design decisions
