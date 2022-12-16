@@ -1,6 +1,6 @@
 main:   
     addi    s0, zero, 0x1       # s0: set to 1 to avoid using bne
-    addi    a0, zero, 0x0       # special state for when lfsr is running
+    addi    a0, zero, 0xC3      # special state for when lfsr is running
     addi    a1, zero, 0x0
     jal     ra, lfsr
 start:  

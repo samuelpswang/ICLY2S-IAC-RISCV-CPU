@@ -7,6 +7,8 @@
 # assembly
 *.hex
 *.asm
+program/data.mem
+program/instr.hex
 
 # verilator
 **/build/**
