@@ -10,13 +10,10 @@
   * [Control Unit (Samuel, Bharathaan)](docs/Log_Control_Unit.md)
   * [ALU (Bharathaan)](docs/Log_Alu.md)
   * [Data Memory (Chenglin)](docs/Log_Data_Mem.md)
-  * [Debugging Single Cycle CPU (Bharathaan)](docs/Log_Debug_Sc.md)
 * Pipeline
   * [Programs For Pipelined CPUs (Samuel)](docs/Log_Pipeline_Program.md)
-  * [Debugging Pipelined CPU (Bharathaan, Samuel)](docs/Log_Debug_Pip.md)
 * Data Cache
   * [Data Cache (Chenglin, Qidong)](docs/Log_Data_Cache.md)
-  * [Debugging Data Cache CPU (Bharathaan, Chenglin, Qidong)](docs/Log_Debug_Dc.md)
 * Others
   * [Result Verification (Samuel)](docs/Log_Verify.md)
 
