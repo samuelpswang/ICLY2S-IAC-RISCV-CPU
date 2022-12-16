@@ -169,7 +169,7 @@ The results of the testing follow the order in the table:
     * Testing the ALU on its own did not show clearly that it would work as intended in the overall CPU
 
 2. **Incorrect Understanding of SLT operation**
-    * It was assumed that verilator would be abke to differentiate between signed and unsigned operators as shown in the [previous version](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/e68b909bdf4efa3885f3dd485cac15468876e06a)but was fixed in [latest version](../source/alu/alu.sv)
+    * It was assumed that verilator would be abke to differentiate between signed and unsigned operators as shown in the [previous version](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/e68b909bdf4efa3885f3dd485cac15468876e06a) but was fixed in [latest version](../source/alu/alu.sv)
 
 3. **Debugging with reference program**
     * It was noticed that the zero was getting overwritten due to the RET instruction so the register file was modified to not load anything into the zero register
