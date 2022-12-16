@@ -5,16 +5,16 @@
 Note that only the first commit that contains the majority of the contribution is linked after the item listed below.
 
 * Infrastructure
-  * Written overall documentation: README.md and releases. samuelpswang@d9fcad91085f0f3525649f62ab7182a64270b549
-  * Created repo workflow: file structures, branches, and gitignores. (42d89f1c9ee92c2f03e9740f0fec810aded759c0)
-  * Created entry script: debug.sh and entrypoint.sh. (516247088ea9224b982fd84529b77bec009aee98)
+  * Written overall documentation: README.md and releases. ([d9fcad9](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/d9fcad91085f0f3525649f62ab7182a64270b549))
+  * Created repo workflow: file structures, branches, and gitignores. ([42d89f1](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/42d89f1c9ee92c2f03e9740f0fec810aded759c0))
+  * Created entry script: debug.sh and entrypoint.sh. ([5162470](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/516247088ea9224b982fd84529b77bec009aee98))
 * Single Cycle
-  * F1 program. (44277b53ac53b2dd3e0c6704910e06567c711ef1)
-  * Control unit and sign exntend components. (3563a6a820932df696d60c43c184cd93b3ffc869)
+  * F1 program. ([44277b5](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/44277b53ac53b2dd3e0c6704910e06567c711ef1))
+  * Control unit and sign exntend components. ([3563a6a](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/3563a6a820932df696d60c43c184cd93b3ffc869))
 * Pipelined
-  * F1 program and reference program pipeline versions. (b4cb93a7cef3078ac6c063301441267859d38abc)
-  * Decode stage pipeline register. (67dfab7e1099a5a7e6945309e3a28450a93a1692)
-  * Overall debugging. (various)
+  * F1 program and reference program pipeline versions. ([b4cb93a](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/b4cb93a7cef3078ac6c063301441267859d38abc))(b4cb93a7cef3078ac6c063301441267859d38abc)
+  * Decode stage pipeline register. ([67dfab7](https://github.com/EIE2-IAC-Labs/iac-riscv-cw-24/commit/b4cb93a7cef3078ac6c063301441267859d38abc))(67dfab7e1099a5a7e6945309e3a28450a93a1692)
+  * Overall debugging. (various commits)
 
 ## What I Learned
 
