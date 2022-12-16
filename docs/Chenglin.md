@@ -24,7 +24,8 @@
       * Data cache with dirty bits
       * A way-merger unit that takes output from the two caches, decides hit, select data output, and generate write enable for the data memory
       * Top module to link the aforementioned modules together, generate address for data memory, and provide stall signal
-* Note: These two prototypes are not included in the final design, but could be found in the push history.
+* Note 1: These two prototypes are not included in the final design, but could be found in the push history.
+* Note 2: Links to the commits are included in the appendix.
 
 ## Special Design Decisions
 
